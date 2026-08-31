@@ -1,2071 +1,342 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="Inscrição para o Jantar de Lançamento do Projeto Social A Casa Delas."
-  >
-
-  <title>A Casa Delas | Jantar de Lançamento</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inscrição e cadastro de apoiadores do Projeto A Casa Delas.">
+  <title>A Casa Delas | Inscrição e Apoio</title>
   <style>
-    /* =========================================================
-       CORES E CONFIGURAÇÕES GERAIS
-       MOBILE FIRST
-       ========================================================= */
-
     :root {
       --vinho: #4b2d37;
-      --vinho-2: #6b3a48;
+      --vinho-claro: #6f414e;
       --rose: #b66779;
       --rose-claro: #d9a4ae;
-      --rosa-nevoa: #f3e4e2;
-      --rosa-fundo: #fbf5f2;
+      --fundo: #fbf4f0;
       --creme: #fffaf6;
-      --branco: #ffffff;
+      --branco: #fff;
       --texto: #34272b;
       --texto-suave: #74666a;
       --borda: #ead8d4;
-      --verde-whatsapp: #25D366;
-      --verde-whatsapp-hover: #1fad54;
-      --sombra: 0 15px 35px rgba(75, 45, 55, .12);
+      --verde: #25d366;
+      --verde-hover: #1eaf55;
+      --sombra: 0 18px 45px rgba(75,45,55,.14);
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
+      min-height: 100vh;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--texto);
-      background: var(--creme);
-      line-height: 1.6;
-      overflow-x: hidden;
+      background: linear-gradient(160deg, #f7e9e5, var(--creme));
+      line-height: 1.5;
     }
+    body.capa-aberta { overflow: hidden; }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    .oculto { display: none !important; }
 
-    body.capa-aberta {
-      overflow: hidden;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1120px;
-      margin: auto;
-      padding-left: 18px;
-      padding-right: 18px;
-    }
-
-    .oculto {
-      display: none !important;
-    }
-
-    /* =========================================================
-       CAPA INICIAL
-       ========================================================= */
-
-    .capa-inicial {
+    .capa {
       position: fixed;
       inset: 0;
-      z-index: 9999;
-      background: linear-gradient(180deg, #f8ece8, #fffaf6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px;
-      overflow-y: auto;
-      transition: opacity .35s ease, visibility .35s ease;
-    }
-
-    .capa-inicial.oculta {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .capa-conteudo {
-      width: 100%;
-      max-width: 480px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .capa-convite {
-      width: auto;
-      max-width: 100%;
-      max-height: calc(100svh - 100px);
-      object-fit: contain;
-      border-radius: 18px;
-      box-shadow: 0 15px 40px rgba(75, 45, 55, .18);
-    }
-
-    .btn-capa {
-      width: 100%;
-      min-height: 56px;
-      border: none;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--rose), var(--vinho));
-      color: white;
-      font-size: 1.05rem;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 12px 25px rgba(75, 45, 55, .20);
-      transition: .2s ease;
-    }
-
-    .btn-capa:active {
-      transform: scale(.98);
-    }
-
-    /* =========================================================
-       CABEÇALHO
-       SOMENTE LOGOMARCA
-       ========================================================= */
-
-    .topo {
-      background: rgba(255, 250, 246, .96);
-      border-bottom: 1px solid var(--borda);
-      position: sticky;
-      top: 0;
       z-index: 100;
-    }
-
-    .topo-conteudo {
-      min-height: 76px;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow-y: auto;
+      padding: 18px;
+      background: linear-gradient(180deg, #f8ece8, #fffaf6);
+      transition: opacity .35s, visibility .35s;
     }
-
-    .logo-topo {
-      width: 70px;
-      height: 70px;
-      object-fit: contain;
-    }
-
-    /* =========================================================
-       BOTÕES
-       ========================================================= */
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+    .capa.fechada { opacity: 0; visibility: hidden; pointer-events: none; }
+    .capa-conteudo { width: min(100%, 540px); text-align: center; }
+    .capa img {
       width: 100%;
-      min-height: 52px;
-      padding: 13px 20px;
-      border: none;
-      border-radius: 999px;
-      font-weight: 800;
-      cursor: pointer;
-      text-align: center;
-      transition: .2s ease;
-    }
-
-    .btn-principal {
-      color: white;
-      background: linear-gradient(135deg, var(--rose), var(--vinho));
-      box-shadow: 0 10px 25px rgba(75, 45, 55, .17);
-    }
-
-    .btn-whatsapp {
-      color: white;
-      background: var(--verde-whatsapp);
-      box-shadow: 0 10px 24px rgba(37, 211, 102, .18);
-    }
-
-    .btn-whatsapp:hover {
-      background: var(--verde-whatsapp-hover);
-    }
-
-    .btn:active {
-      transform: scale(.98);
-    }
-
-    /* =========================================================
-       SEÇÕES
-       ========================================================= */
-
-    .secao {
-      padding: 55px 0;
-    }
-
-    .secao-suave {
-      background: linear-gradient(
-        180deg,
-        rgba(243, 228, 226, .65),
-        rgba(255, 250, 246, .95)
-      );
-      border-top: 1px solid var(--borda);
-      border-bottom: 1px solid var(--borda);
-    }
-
-    .titulo-centro {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .chamada {
-      color: var(--rose);
-      text-transform: uppercase;
-      font-weight: 800;
-      font-size: .72rem;
-      letter-spacing: .18em;
-      margin-bottom: 8px;
-    }
-
-    h1,
-    h2,
-    h3 {
-      font-family: Georgia, "Times New Roman", serif;
-      color: var(--vinho);
-      line-height: 1.1;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-    }
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 15px;
-    }
-
-    h3 {
-      font-size: 1.4rem;
-      margin-bottom: 8px;
-    }
-
-    .linha-rosa {
-      width: 70px;
-      height: 3px;
-      border-radius: 999px;
-      margin: 16px auto;
-      background: linear-gradient(90deg, var(--rose-claro), var(--vinho));
-    }
-
-    /* =========================================================
-       APRESENTAÇÃO
-       ========================================================= */
-
-    .apresentacao {
-      text-align: center;
-      padding: 45px 0;
-    }
-
-    .logo-apresentacao {
-      width: 180px;
-      height: auto;
+      max-height: calc(100svh - 105px);
       object-fit: contain;
-      margin: 0 auto 25px;
-      filter: drop-shadow(0 10px 20px rgba(75, 45, 55, .10));
-    }
-
-    .apresentacao p {
-      color: var(--texto-suave);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .slogan {
-      margin-top: 18px;
-      color: var(--rose);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      font-size: .8rem;
-    }
-
-    /* =========================================================
-       EVENTO
-       ========================================================= */
-
-    .evento-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-
-    .info-card {
-      padding: 22px;
-      background: white;
-      border: 1px solid var(--borda);
       border-radius: 22px;
-      box-shadow: 0 8px 25px rgba(75, 45, 55, .07);
-    }
-
-    .icone {
-      width: 46px;
-      height: 46px;
-      border-radius: 15px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 14px;
-      background: var(--rosa-nevoa);
-      color: var(--vinho);
-      font-size: 1.3rem;
-    }
-
-    .info-card p {
-      color: var(--texto-suave);
-    }
-
-    /* =========================================================
-       PACOTES
-       ========================================================= */
-
-    .pacotes {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-    }
-
-    .pacote {
-      background: white;
-      border: 1px solid var(--borda);
-      border-radius: 24px;
-      padding: 26px 20px;
-      text-align: center;
       box-shadow: var(--sombra);
     }
-
-    .pacote-destaque {
-      border: 2px solid rgba(182, 103, 121, .50);
-    }
-
-    .etiqueta {
+    .link-inscricao {
       display: inline-block;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: var(--rosa-nevoa);
-      color: var(--vinho);
-      font-size: .75rem;
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    .preco {
-      color: var(--rose);
-      font-size: 2.2rem;
-      font-weight: 900;
-      margin: 12px 0 8px;
-    }
-
-    .pacote p {
-      color: var(--texto-suave);
-      margin-bottom: 20px;
-    }
-
-    /* =========================================================
-       PROJETO SOCIAL
-       ========================================================= */
-
-    .sobre-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 25px;
-    }
-
-    .sobre-texto {
-      text-align: center;
-    }
-
-    .sobre-texto p {
-      color: var(--texto-suave);
-    }
-
-    .sobre-card {
-      padding: 25px 20px;
-      border-radius: 22px;
-      color: white;
-      background: linear-gradient(150deg, var(--vinho), var(--vinho-2));
-      box-shadow: var(--sombra);
-    }
-
-    .sobre-card h3 {
-      color: white;
-    }
-
-    .sobre-card p {
-      color: rgba(255, 255, 255, .85);
-    }
-
-    /* =========================================================
-       INSCRIÇÃO
-       ========================================================= */
-
-    .formulario-area {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 30px;
-    }
-
-    .formulario-info p {
-      color: var(--texto-suave);
-    }
-
-    .form-box {
-      background: white;
-      border: 1px solid var(--borda);
-      border-radius: 24px;
-      padding: 22px 17px;
-      box-shadow: var(--sombra);
-    }
-
-    .campo {
-      display: grid;
-      gap: 7px;
-      margin-bottom: 15px;
-    }
-
-    .campo label {
-      color: var(--vinho);
-      font-size: .9rem;
-      font-weight: 800;
-    }
-
-    .campo input,
-    .campo select {
-      width: 100%;
-      min-height: 52px;
-      padding: 13px 14px;
-      border: 1px solid #dccbc7;
-      border-radius: 14px;
-      color: var(--texto);
-      background: #fffdfc;
-      outline: none;
-      font-size: 16px;
-    }
-
-    .campo input:focus,
-    .campo select:focus {
-      border-color: var(--rose);
-      box-shadow: 0 0 0 4px rgba(182, 103, 121, .10);
-    }
-
-    .grade-2 {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
-
-    /* =========================================================
-       PARTICIPANTES DA MESA
-       ========================================================= */
-
-    .mesa-nomes {
-      display: none;
-      margin: 4px 0 18px;
-      padding: 17px;
-      background: var(--rosa-nevoa);
-      border-radius: 18px;
-    }
-
-    .mesa-nomes.ativo {
-      display: block;
-    }
-
-    .mesa-nomes p {
-      color: var(--texto-suave);
-      font-size: .9rem;
-      margin-bottom: 14px;
-    }
-
-    /* =========================================================
-       RESUMOS
-       ========================================================= */
-
-    .resumo-pagamento {
-      margin-top: 18px;
-      padding: 17px;
-      background: linear-gradient(
-        135deg,
-        rgba(243, 228, 226, .86),
-        rgba(255, 250, 246, .96)
-      );
-      border: 1px solid var(--borda);
-      border-radius: 18px;
-    }
-
-    .resumo-linha {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      padding: 7px 0;
-    }
-
-    .resumo-total {
-      margin-top: 8px;
-      padding-top: 12px;
-      border-top: 1px solid var(--borda);
-      color: var(--vinho);
-      font-weight: 900;
-    }
-
-    /* =========================================================
-       LGPD
-       ========================================================= */
-
-    .termos {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 10px;
-      margin: 18px 0;
-      color: var(--texto-suave);
-      font-size: .84rem;
-    }
-
-    .termos input {
-      width: 18px;
-      height: 18px;
-      margin-top: 3px;
-      accent-color: var(--rose);
-    }
-
-    .mensagem {
-      margin-top: 14px;
-      color: var(--vinho);
-      font-weight: 700;
-      min-height: 24px;
-    }
-
-    /* =========================================================
-       ETAPA DE PAGAMENTO
-       SOMENTE APARECE DEPOIS DO CADASTRO
-       ========================================================= */
-
-    .etapa-pagamento {
-      display: none;
-      animation: aparecer .35s ease;
-    }
-
-    .etapa-pagamento.ativa {
-      display: block;
-    }
-
-    @keyframes aparecer {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .pagamento-cabecalho {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .pagamento-cabecalho .icone-pix {
-      width: 56px;
-      height: 56px;
-      border-radius: 18px;
-      margin: 0 auto 13px;
-      display: grid;
-      place-items: center;
-      background: var(--rosa-nevoa);
-      color: var(--vinho);
-      font-size: 1.5rem;
-      font-weight: 900;
-    }
-
-    .pagamento-cabecalho p {
-      color: var(--texto-suave);
-    }
-
-    .pix-box {
-      margin-top: 18px;
-      padding: 20px 16px;
-      border: 1px solid var(--borda);
-      border-radius: 18px;
-      background: #fffaf6;
-    }
-
-    .pix-chave {
-      margin-top: 15px;
-      padding: 18px 14px;
-      background: white;
-      border: 1px dashed var(--rose);
-      border-radius: 14px;
-      text-align: center;
-    }
-
-    .pix-chave small {
-      display: block;
-      color: var(--texto-suave);
-      margin-bottom: 5px;
-    }
-
-    .pix-chave strong {
-      display: block;
+      margin-top: 16px;
+      border: 0;
+      background: transparent;
       color: var(--vinho);
       font-size: 1.12rem;
-      word-break: break-word;
+      font-weight: 900;
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      letter-spacing: .02em;
     }
+    .link-inscricao:hover { color: var(--rose); }
 
-    .instrucoes-pagamento {
-      margin-top: 15px;
-      padding: 14px;
-      border-radius: 14px;
-      background: var(--rosa-nevoa);
-      color: var(--texto-suave);
-      font-size: .9rem;
+    main { width: min(100% - 28px, 760px); margin: 0 auto; padding: 42px 0; }
+    .cabecalho { text-align: center; margin-bottom: 28px; }
+    .cabecalho img { width: 150px; border-radius: 50%; margin: 0 auto 16px; }
+    .cabecalho h1 { color: var(--vinho); font-family: Georgia, serif; font-size: clamp(2rem, 7vw, 3rem); }
+    .cabecalho p { margin-top: 8px; color: var(--texto-suave); }
+
+    .painel {
+      padding: clamp(20px, 5vw, 36px);
+      border: 1px solid var(--borda);
+      border-radius: 28px;
+      background: rgba(255,255,255,.96);
+      box-shadow: var(--sombra);
     }
-
-    .instrucoes-pagamento strong {
+    .escolha h2, .formulario h2 { color: var(--vinho); font-family: Georgia, serif; text-align: center; }
+    .escolha > p, .subtitulo { color: var(--texto-suave); text-align: center; margin: 8px 0 24px; }
+    .opcoes { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .opcao {
+      min-height: 78px;
+      padding: 16px 20px;
+      border: 2px solid var(--borda);
+      border-radius: 20px;
       color: var(--vinho);
+      background: var(--creme);
+      font-weight: 900;
+      transition: .2s;
     }
+    .opcao:hover { border-color: var(--rose); transform: translateY(-2px); }
+    .opcao span { display: block; margin-top: 4px; color: var(--texto-suave); font-size: .84rem; font-weight: 400; }
 
-    .confirmar-area {
-      margin-top: 20px;
+    .voltar {
+      border: 0;
+      background: transparent;
+      color: var(--rose);
+      font-weight: 800;
+      margin-bottom: 18px;
     }
-
-    .aviso-whatsapp {
-      margin-top: 12px;
-      color: var(--texto-suave);
-      font-size: .84rem;
-      text-align: center;
+    .campo { margin-bottom: 17px; }
+    .campo label { display: block; margin-bottom: 7px; color: var(--vinho); font-size: .92rem; font-weight: 800; }
+    .campo input, .campo textarea, .campo select {
+      width: 100%;
+      border: 1px solid #dccbc7;
+      border-radius: 14px;
+      padding: 14px;
+      color: var(--texto);
+      background: #fffdfc;
+      outline: 0;
+      font-size: 16px;
     }
-
-    /* =========================================================
-       RODAPÉ
-       ========================================================= */
-
-    .rodape {
-      background: var(--vinho);
-      color: white;
-      text-align: center;
-      padding: 35px 18px;
+    .campo input, .campo select { min-height: 52px; }
+    .campo textarea { min-height: 150px; resize: vertical; }
+    .campo input:focus, .campo textarea:focus, .campo select:focus {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 4px rgba(182,103,121,.11);
     }
-
-    .rodape img {
-      width: 90px;
-      margin: 0 auto 14px;
+    .contador { display: block; margin-top: 5px; color: var(--texto-suave); font-size: .8rem; text-align: right; }
+    .detalhe-apoio { padding: 15px; margin: -4px 0 17px; border-radius: 16px; background: #f8eeee; }
+    .termos { display: grid; grid-template-columns: auto 1fr; gap: 10px; margin: 18px 0; color: var(--texto-suave); font-size: .84rem; }
+    .termos input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--rose); }
+    .enviar {
+      width: 100%;
+      min-height: 55px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--verde);
+      color: var(--branco);
+      font-weight: 900;
+      box-shadow: 0 10px 25px rgba(37,211,102,.2);
     }
+    .enviar:hover { background: var(--verde-hover); }
+    .aviso { margin-top: 12px; color: var(--texto-suave); text-align: center; font-size: .82rem; }
+    footer { padding: 24px; color: var(--vinho); text-align: center; font-size: .85rem; }
 
-    .rodape strong {
-      display: block;
-    }
-
-    .rodape p {
-      color: rgba(255, 255, 255, .75);
-      font-size: .85rem;
-      margin-top: 4px;
-    }
-
-    /* =========================================================
-       CELULARES PEQUENOS
-       ========================================================= */
-
-    @media (max-width: 390px) {
-      .container {
-        padding-left: 14px;
-        padding-right: 14px;
-      }
-
-      .secao {
-        padding: 45px 0;
-      }
-
-      h2 {
-        font-size: 1.75rem;
-      }
-
-      .form-box {
-        padding: 19px 14px;
-      }
-    }
-
-    /* =========================================================
-       TABLET / COMPUTADOR
-       ========================================================= */
-
-    @media (min-width: 768px) {
-      .container {
-        padding-left: 30px;
-        padding-right: 30px;
-      }
-
-      .logo-topo {
-        width: 82px;
-        height: 82px;
-      }
-
-      .topo-conteudo {
-        min-height: 88px;
-      }
-
-      .logo-apresentacao {
-        width: 220px;
-      }
-
-      .apresentacao {
-        padding: 65px 0;
-      }
-
-      .evento-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .pacotes {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 900px;
-        margin: auto;
-      }
-
-      .sobre-grid {
-        grid-template-columns: .9fr 1.1fr;
-        align-items: center;
-        gap: 45px;
-      }
-
-      .sobre-texto {
-        text-align: left;
-      }
-
-      .formulario-area {
-        grid-template-columns: .8fr 1.2fr;
-        gap: 42px;
-        align-items: start;
-      }
-
-      .grade-2,
-      .mesa-nomes .grade-2 {
-        grid-template-columns: 1fr 1fr;
-        gap: 14px;
-      }
-    }
+    @media (min-width: 650px) { .opcoes { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
-
 <body class="capa-aberta">
-
-  <!-- =========================================================
-       CAPA INICIAL
-       ========================================================= -->
-
-  <section
-    class="capa-inicial"
-    id="capaInicial"
-  >
+  <section class="capa" id="capa">
     <div class="capa-conteudo">
-
-      <img
-        class="capa-convite"
-        src="./convite.png"
-        alt="Convite do Jantar de Lançamento A Casa Delas"
-      >
-
-      <button
-        type="button"
-        class="btn-capa"
-        id="btnEntrar"
-      >
-        Faça sua Inscrição!
-      </button>
-
+      <img src="./a-casa-delas.jpeg" alt="Projeto A Casa Delas">
+      <button class="link-inscricao" id="abrirCadastro" type="button">FAÇA A SUA INSCRIÇÃO</button>
     </div>
   </section>
 
-  <!-- =========================================================
-       CABEÇALHO
-       ========================================================= -->
+  <main id="cadastro">
+    <header class="cabecalho">
+      <img src="./a-casa-delas.jpeg" alt="Logomarca A Casa Delas">
+      <h1>A Casa Delas</h1>
+      <p>Acolher • Fortalecer • Transformar</p>
+    </header>
 
-  <header class="topo">
-    <div class="container topo-conteudo">
-
-      <a href="#evento">
-        <img
-          class="logo-topo"
-          src="./logo-transparente.png"
-          alt="Logomarca A Casa Delas"
-        >
-      </a>
-
-    </div>
-  </header>
-
-  <main>
-
-    <!-- =======================================================
-         APRESENTAÇÃO
-         ======================================================= -->
-
-    <section class="apresentacao">
-      <div class="container">
-
-        <img
-          class="logo-apresentacao"
-          src="./logo-transparente.png"
-          alt="Projeto Social A Casa Delas"
-        >
-
-        <div class="chamada">
-          Jantar de Lançamento
-        </div>
-
-        <p>
-          Venha celebrar conosco o início de um novo tempo
-          de acolhimento, fortalecimento e transformação de vidas.
-        </p>
-
-        <div class="slogan">
-          Acolher • Fortalecer • Transformar
-        </div>
-
+    <section class="painel escolha" id="escolha">
+      <h2>Como você deseja participar?</h2>
+      <p>Escolha uma das opções abaixo para continuar.</p>
+      <div class="opcoes">
+        <button class="opcao" type="button" data-abrir="inscricao">
+          INSCRIÇÃO
+          <span>Quero me inscrever no projeto.</span>
+        </button>
+        <button class="opcao" type="button" data-abrir="apoiador">
+          QUERO SER UM APOIADOR
+          <span>Quero contribuir com o projeto.</span>
+        </button>
       </div>
     </section>
 
-    <!-- =======================================================
-         EVENTO
-         ======================================================= -->
-
-    <section
-      class="secao secao-suave"
-      id="evento"
-    >
-      <div class="container">
-
-        <div class="titulo-centro">
-
-          <div class="chamada">
-            31 de agosto de 2026
-          </div>
-
-          <h2>
-            Um encontro para marcar o início de uma nova história
-          </h2>
-
-          <div class="linha-rosa"></div>
-
-        </div>
-
-        <div class="evento-grid">
-
-          <article class="info-card">
-
-            <div class="icone">
-              ♡
-            </div>
-
-            <h3>
-              Data e horário
-            </h3>
-
-            <p>
-              31 de agosto de 2026
-              <br>
-              às 19h
-            </p>
-
-          </article>
-
-          <article class="info-card">
-
-            <div class="icone">
-              ⌂
-            </div>
-
-            <h3>
-              Local
-            </h3>
-
-            <p>
-              Auditório da Igreja Batista Getsêmani
-              <br>
-              Rua Antônio Nobre Filho, 155
-              <br>
-              Jabour – Vitória/ES
-            </p>
-
-          </article>
-
-          <article class="info-card">
-
-            <div class="icone">
-              ✦
-            </div>
-
-            <h3>
-              Jantar
-            </h3>
-
-            <p>
-              Lançamento oficial do Projeto Social A Casa Delas.
-            </p>
-
-          </article>
-
-        </div>
-
+    <form class="painel formulario oculto" id="formInscricao">
+      <button class="voltar" type="button">← Voltar às opções</button>
+      <h2>Inscrição</h2>
+      <p class="subtitulo">Preencha os seus dados.</p>
+      <div class="campo">
+        <label for="nomeInscricao">Nome completo *</label>
+        <input id="nomeInscricao" name="nome" type="text" maxlength="120" autocomplete="name" required>
       </div>
-    </section>
-
-    <!-- =======================================================
-         PACOTES
-         ======================================================= -->
-
-    <section
-      class="secao"
-      id="pacotes"
-    >
-      <div class="container">
-
-        <div class="titulo-centro">
-
-          <div class="chamada">
-            Escolha sua inscrição
-          </div>
-
-          <h2>
-            Participe do lançamento
-          </h2>
-
-          <p>
-            Escolha sua modalidade e faça sua inscrição.
-          </p>
-
-        </div>
-
-        <div class="pacotes">
-
-          <article class="pacote">
-
-            <span class="etiqueta">
-              INDIVIDUAL
-            </span>
-
-            <h3>
-              Inscrição Individual
-            </h3>
-
-            <div class="preco">
-              R$ 50,00
-            </div>
-
-            <p>
-              Participação individual no Jantar de Lançamento.
-            </p>
-
-            <a
-              href="#inscricao"
-              class="btn btn-principal"
-              onclick="selecionarPacote('individual')"
-            >
-              Escolher Individual
-            </a>
-
-          </article>
-
-          <article class="pacote pacote-destaque">
-
-            <span class="etiqueta">
-              MESA • 6 PESSOAS
-            </span>
-
-            <h3>
-              Mesa Completa
-            </h3>
-
-            <div class="preco">
-              R$ 280,00
-            </div>
-
-            <p>
-              Reserva de uma mesa para até 6 participantes.
-            </p>
-
-            <a
-              href="#inscricao"
-              class="btn btn-principal"
-              onclick="selecionarPacote('mesa_6')"
-            >
-              Reservar Mesa
-            </a>
-
-          </article>
-
-        </div>
-
+      <div class="campo">
+        <label for="nascimento">Data de nascimento *</label>
+        <input id="nascimento" name="nascimento" type="date" required>
       </div>
-    </section>
-
-    <!-- =======================================================
-         PROJETO SOCIAL
-         ======================================================= -->
-
-    <section
-      class="secao secao-suave"
-      id="projeto"
-    >
-      <div class="container sobre-grid">
-
-        <div class="sobre-texto">
-
-          <div class="chamada">
-            Projeto Social
-          </div>
-
-          <h2>
-            Um lugar de acolhimento, cuidado e transformação.
-          </h2>
-
-          <p>
-            A Casa Delas nasce para promover o desenvolvimento
-            integral da mulher, unindo cuidado físico, emocional,
-            social e espiritual.
-          </p>
-
-          <br>
-
-          <p>
-            Um projeto voltado para acolhimento, capacitação,
-            desenvolvimento, fortalecimento e novas oportunidades.
-          </p>
-
-        </div>
-
-        <div class="sobre-card">
-
-          <h3>
-            Acolher • Fortalecer • Transformar
-          </h3>
-
-          <p>
-            Um espaço seguro para acolher mulheres,
-            fortalecer famílias e transformar histórias.
-          </p>
-
-        </div>
-
+      <div class="campo">
+        <label for="telefoneInscricao">Telefone WhatsApp *</label>
+        <input id="telefoneInscricao" name="telefone" type="tel" maxlength="16" placeholder="(27) 99999-9999" autocomplete="tel" required>
       </div>
-    </section>
-
-    <!-- =======================================================
-         INSCRIÇÃO
-         ======================================================= -->
-
-    <section
-      class="secao"
-      id="inscricao"
-    >
-      <div class="container formulario-area">
-
-        <div class="formulario-info">
-
-          <div class="chamada">
-            Inscrição
-          </div>
-
-          <h2>
-            Reserve sua participação
-          </h2>
-
-          <p>
-            Primeiro preencha seus dados.
-            Depois você verá a chave Pix e o valor correspondente
-            à sua modalidade.
-          </p>
-
-          <div class="resumo-pagamento">
-
-            <div class="resumo-linha">
-              <span>Individual</span>
-              <strong>R$ 50,00</strong>
-            </div>
-
-            <div class="resumo-linha">
-              <span>Mesa para 6 pessoas</span>
-              <strong>R$ 280,00</strong>
-            </div>
-
-          </div>
-
-          <p class="pagamento-aviso">
-            Após efetuar o Pix, clique em
-            <strong>Confirmar sua inscrição</strong>.
-            Você será direcionado ao WhatsApp de A Casa Delas.
-          </p>
-
-        </div>
-
-        <!-- ===================================================
-             FORMULÁRIO
-             =================================================== -->
-
-        <form
-          class="form-box"
-          id="formInscricao"
-        >
-
-          <!-- ===============================================
-               ETAPA 1 — CADASTRO
-               =============================================== -->
-
-          <div id="etapaCadastro">
-
-            <div class="campo">
-
-              <label for="nome">
-                Nome completo *
-              </label>
-
-              <input
-                type="text"
-                id="nome"
-                name="full_name"
-                maxlength="120"
-                autocomplete="name"
-                required
-              >
-
-            </div>
-
-            <div class="campo">
-
-              <label for="email">
-                E-mail *
-              </label>
-
-              <input
-                type="email"
-                id="email"
-                name="email"
-                autocomplete="email"
-                required
-              >
-
-            </div>
-
-            <div class="campo">
-
-              <label for="telefone">
-                WhatsApp *
-              </label>
-
-              <input
-                type="tel"
-                id="telefone"
-                name="phone"
-                placeholder="(27) 99999-9999"
-                autocomplete="tel"
-                required
-              >
-
-            </div>
-
-            <div class="campo">
-
-              <label for="pacote">
-                Tipo de inscrição *
-              </label>
-
-              <select
-                id="pacote"
-                name="package_type"
-                required
-              >
-
-                <option value="">
-                  Selecione
-                </option>
-
-                <option value="individual">
-                  Individual — R$ 50,00
-                </option>
-
-                <option value="mesa_6">
-                  Mesa para 6 pessoas — R$ 280,00
-                </option>
-
-              </select>
-
-            </div>
-
-            <!-- =============================================
-                 PARTICIPANTES DA MESA
-                 ============================================= -->
-
-            <div
-              class="mesa-nomes"
-              id="mesaNomes"
-            >
-
-              <h3>
-                Participantes da mesa
-              </h3>
-
-              <p>
-                Informe os nomes das pessoas que participarão da mesa.
-                Se algum nome ainda não estiver definido, você pode deixar
-                o campo em branco.
-              </p>
-
-              <div class="grade-2">
-
-                <div class="campo">
-                  <input
-                    type="text"
-                    name="guest_1"
-                    placeholder="Participante 1"
-                  >
-                </div>
-
-                <div class="campo">
-                  <input
-                    type="text"
-                    name="guest_2"
-                    placeholder="Participante 2"
-                  >
-                </div>
-
-                <div class="campo">
-                  <input
-                    type="text"
-                    name="guest_3"
-                    placeholder="Participante 3"
-                  >
-                </div>
-
-                <div class="campo">
-                  <input
-                    type="text"
-                    name="guest_4"
-                    placeholder="Participante 4"
-                  >
-                </div>
-
-                <div class="campo">
-                  <input
-                    type="text"
-                    name="guest_5"
-                    placeholder="Participante 5"
-                  >
-                </div>
-
-                <div class="campo">
-                  <input
-                    type="text"
-                    name="guest_6"
-                    placeholder="Participante 6"
-                  >
-                </div>
-
-              </div>
-
-            </div>
-
-            <!-- =============================================
-                 RESUMO DO CADASTRO
-                 ============================================= -->
-
-            <div class="resumo-pagamento">
-
-              <div class="resumo-linha">
-
-                <span>
-                  Modalidade
-                </span>
-
-                <strong id="resumoModalidade">
-                  —
-                </strong>
-
-              </div>
-
-              <div class="resumo-linha resumo-total">
-
-                <span>
-                  Total
-                </span>
-
-                <strong id="resumoValor">
-                  R$ 0,00
-                </strong>
-
-              </div>
-
-            </div>
-
-            <!-- =============================================
-                 LGPD
-                 ============================================= -->
-
-            <label class="termos">
-
-              <input
-                type="checkbox"
-                name="consent"
-                required
-              >
-
-              <span>
-                Autorizo o uso dos dados informados exclusivamente
-                para gestão da inscrição e comunicação referente ao evento.
-              </span>
-
-            </label>
-
-            <!-- =============================================
-                 BOTÃO PARA FINALIZAR CADASTRO
-                 ============================================= -->
-
-            <button
-              type="submit"
-              class="btn btn-principal"
-              id="btnContinuar"
-              style="width:100%;"
-            >
-              Continuar
-            </button>
-
-            <p
-              class="mensagem"
-              id="mensagemFormulario"
-            ></p>
-
-          </div>
-
-          <!-- ===============================================
-               ETAPA 2 — PIX E CONFIRMAÇÃO
-               =============================================== -->
-
-          <div
-            class="etapa-pagamento"
-            id="etapaPagamento"
-          >
-
-            <div class="pagamento-cabecalho">
-
-              <div class="icone-pix">
-                ◇
-              </div>
-
-              <div class="chamada">
-                Última etapa
-              </div>
-
-              <h2>
-                Pagamento via Pix
-              </h2>
-
-              <p>
-                Seus dados foram preenchidos.
-                Agora realize o Pix e depois confirme sua inscrição.
-              </p>
-
-            </div>
-
-            <div class="resumo-pagamento">
-
-              <div class="resumo-linha">
-
-                <span>
-                  Nome
-                </span>
-
-                <strong id="pagamentoNome">
-                  —
-                </strong>
-
-              </div>
-
-              <div class="resumo-linha">
-
-                <span>
-                  Modalidade
-                </span>
-
-                <strong id="pagamentoModalidade">
-                  —
-                </strong>
-
-              </div>
-
-              <div class="resumo-linha resumo-total">
-
-                <span>
-                  Valor a pagar
-                </span>
-
-                <strong id="pagamentoValor">
-                  R$ 0,00
-                </strong>
-
-              </div>
-
-            </div>
-
-            <div class="pix-box">
-
-              <h3>
-                Chave Pix
-              </h3>
-
-              <p>
-                Faça o pagamento para o CNPJ abaixo:
-              </p>
-
-              <div class="pix-chave">
-
-                <small>
-                  PIX — CNPJ
-                </small>
-
-                <strong id="chavePixTexto">
-                  CNPJ NÃO CONFIGURADO
-                </strong>
-
-              </div>
-
-              <div class="instrucoes-pagamento">
-
-                <strong>Após realizar o Pix:</strong>
-                clique no botão abaixo.
-                O WhatsApp de A Casa Delas será aberto com
-                todos os dados da sua inscrição preenchidos.
-
-              </div>
-
-            </div>
-
-            <!-- =============================================
-                 ÚNICO BOTÃO DA ETAPA FINAL
-                 ============================================= -->
-
-            <div class="confirmar-area">
-
-              <button
-                type="button"
-                class="btn btn-whatsapp"
-                id="btnConfirmarInscricao"
-                style="width:100%;"
-              >
-                Confirmar sua inscrição
-              </button>
-
-              <p class="aviso-whatsapp">
-                No WhatsApp, basta enviar a mensagem.
-                Nossa equipe fará a conferência do pagamento.
-              </p>
-
-            </div>
-
-          </div>
-
-        </form>
-
+      <div class="campo">
+        <label for="historia">Conte um pouco da sua história (opcional)</label>
+        <textarea id="historia" name="historia" maxlength="500" placeholder="Escreva aqui, se desejar..."></textarea>
+        <small class="contador"><span id="contadorHistoria">0</span>/500 caracteres</small>
       </div>
-    </section>
+      <label class="termos">
+        <input name="consentimento" type="checkbox" required>
+        <span>Autorizo o uso destes dados exclusivamente para contato e organização das atividades do Projeto A Casa Delas.</span>
+      </label>
+      <button class="enviar" type="submit">ENVIAR INSCRIÇÃO PELO WHATSAPP</button>
+      <p class="aviso">O WhatsApp será aberto com seus dados. Para concluir, toque em “Enviar”.</p>
+    </form>
 
+    <form class="painel formulario oculto" id="formApoiador">
+      <button class="voltar" type="button">← Voltar às opções</button>
+      <h2>Quero ser um apoiador</h2>
+      <p class="subtitulo">Conte como você gostaria de apoiar o projeto.</p>
+      <div class="campo">
+        <label for="nomeApoiador">Nome *</label>
+        <input id="nomeApoiador" name="nome" type="text" maxlength="120" autocomplete="name" required>
+      </div>
+      <div class="campo">
+        <label for="telefoneApoiador">Telefone WhatsApp *</label>
+        <input id="telefoneApoiador" name="telefone" type="tel" maxlength="16" placeholder="(27) 99999-9999" autocomplete="tel" required>
+      </div>
+      <div class="campo">
+        <label for="tipoApoio">Como quer apoiar o projeto? *</label>
+        <select id="tipoApoio" name="apoio" required>
+          <option value="">Selecione uma opção</option>
+          <option value="Financeiramente">1 - Financeiramente</option>
+          <option value="Habilidade profissional">2 - Habilidade profissional (qual?)</option>
+          <option value="Promover curso para as mulheres">3 - Promover curso para as mulheres</option>
+        </select>
+      </div>
+      <div class="campo detalhe-apoio oculto" id="campoHabilidade">
+        <label for="habilidade">Qual é a sua habilidade profissional? *</label>
+        <input id="habilidade" name="habilidade" type="text" maxlength="150" placeholder="Informe sua profissão ou habilidade">
+      </div>
+      <div class="campo detalhe-apoio oculto" id="campoCurso">
+        <label for="curso">Qual curso você gostaria de promover? *</label>
+        <input id="curso" name="curso" type="text" maxlength="150" placeholder="Informe o nome ou tema do curso">
+      </div>
+      <label class="termos">
+        <input name="consentimento" type="checkbox" required>
+        <span>Autorizo o uso destes dados exclusivamente para contato e organização das atividades do Projeto A Casa Delas.</span>
+      </label>
+      <button class="enviar" type="submit">ENVIAR CADASTRO PELO WHATSAPP</button>
+      <p class="aviso">O WhatsApp será aberto com seus dados. Para concluir, toque em “Enviar”.</p>
+    </form>
   </main>
 
-  <!-- =========================================================
-       RODAPÉ
-       ========================================================= -->
-
-  <footer class="rodape">
-
-    <div class="container">
-
-      <img
-        src="./logo-transparente.png"
-        alt="A Casa Delas"
-      >
-
-      <strong>
-        Projeto Social A Casa Delas
-      </strong>
-
-      <p>
-        Acolher • Fortalecer • Transformar
-      </p>
-
-    </div>
-
-  </footer>
-
-  <!-- =========================================================
-       JAVASCRIPT
-       ========================================================= -->
+  <footer>Projeto A Casa Delas — Acolher • Fortalecer • Transformar</footer>
 
   <script>
-    /* =========================================================
-       CONFIGURAÇÕES DO SEU PROJETO
-       ========================================================= */
+    const WHATSAPP_PROJETO = "5527997584887";
+    const capa = document.getElementById("capa");
+    const escolha = document.getElementById("escolha");
+    const formInscricao = document.getElementById("formInscricao");
+    const formApoiador = document.getElementById("formApoiador");
+    const historia = document.getElementById("historia");
+    const tipoApoio = document.getElementById("tipoApoio");
+    const campoHabilidade = document.getElementById("campoHabilidade");
+    const campoCurso = document.getElementById("campoCurso");
+    const habilidade = document.getElementById("habilidade");
+    const curso = document.getElementById("curso");
 
-    /*
-      CHAVE PIX
-      CNPJ: 45.624.209/0001-64
-    */
-
-    const CHAVE_PIX_CNPJ =
-      "45624209000164";
-
-
-    /*
-      WHATSAPP QUE RECEBERÁ AS INSCRIÇÕES
-
-      Número configurado:
-      55 + DDD 27 + telefone 99758-4887
-    */
-
-    const WHATSAPP_PROJETO =
-      "5527997584887";
-
-
-    /* =========================================================
-       CAPA
-       ========================================================= */
-
-    const capaInicial =
-      document.getElementById("capaInicial");
-
-    const btnEntrar =
-      document.getElementById("btnEntrar");
-
-
-    btnEntrar.addEventListener(
-      "click",
-      function () {
-
-        capaInicial.classList.add("oculta");
-
-        document.body.classList.remove("capa-aberta");
-
-        setTimeout(
-          function () {
-
-            document
-              .getElementById("evento")
-              .scrollIntoView({
-                behavior: "smooth"
-              });
-
-          },
-          250
-        );
-
-      }
-    );
-
-
-    /* =========================================================
-       ELEMENTOS
-       ========================================================= */
-
-    const formulario =
-      document.getElementById("formInscricao");
-
-    const etapaCadastro =
-      document.getElementById("etapaCadastro");
-
-    const etapaPagamento =
-      document.getElementById("etapaPagamento");
-
-    const pacote =
-      document.getElementById("pacote");
-
-    const mesaNomes =
-      document.getElementById("mesaNomes");
-
-    const resumoModalidade =
-      document.getElementById("resumoModalidade");
-
-    const resumoValor =
-      document.getElementById("resumoValor");
-
-    const mensagemFormulario =
-      document.getElementById("mensagemFormulario");
-
-    const pagamentoNome =
-      document.getElementById("pagamentoNome");
-
-    const pagamentoModalidade =
-      document.getElementById("pagamentoModalidade");
-
-    const pagamentoValor =
-      document.getElementById("pagamentoValor");
-
-    const chavePixTexto =
-      document.getElementById("chavePixTexto");
-
-    const btnConfirmarInscricao =
-      document.getElementById("btnConfirmarInscricao");
-
-
-    /* =========================================================
-       PACOTES
-       ========================================================= */
-
-    const PACOTES = {
-
-      individual: {
-        nome: "Inscrição Individual",
-        valor: 50
-      },
-
-      mesa_6: {
-        nome: "Mesa para 6 pessoas",
-        valor: 280
-      }
-
-    };
-
-
-    /* =========================================================
-       VARIÁVEL QUE GUARDA A INSCRIÇÃO ATUAL
-       ========================================================= */
-
-    let inscricaoAtual = null;
-
-
-    /* =========================================================
-       FUNÇÕES AUXILIARES
-       ========================================================= */
-
-    function formatarReal(valor) {
-
-      return valor.toLocaleString(
-        "pt-BR",
-        {
-          style: "currency",
-          currency: "BRL"
-        }
-      );
-
+    function somenteNumeros(valor) { return String(valor || "").replace(/\D/g, ""); }
+    function abrirWhatsapp(mensagem) {
+      window.location.href = "https://wa.me/" + WHATSAPP_PROJETO + "?text=" + encodeURIComponent(mensagem);
+    }
+    function formatarData(data) {
+      if (!data) return "";
+      const partes = data.split("-");
+      return partes[2] + "/" + partes[1] + "/" + partes[0];
+    }
+    function aplicarMascaraTelefone(campo) {
+      campo.addEventListener("input", () => {
+        let numero = somenteNumeros(campo.value).slice(0, 11);
+        if (numero.length > 10) numero = numero.replace(/(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
+        else if (numero.length > 6) numero = numero.replace(/(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+        else if (numero.length > 2) numero = numero.replace(/(\d{2})(\d+)/, "($1) $2");
+        else if (numero.length) numero = numero.replace(/(\d+)/, "($1");
+        campo.value = numero;
+      });
     }
 
-
-    function formatarCNPJ(cnpj) {
-
-      const numeros =
-        String(cnpj).replace(/\D/g, "");
-
-      if (numeros.length !== 14) {
-        return cnpj;
-      }
-
-      return numeros.replace(
-        /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,
-        "$1.$2.$3/$4-$5"
-      );
-
-    }
-
-
-    function somenteNumeros(valor) {
-
-      return String(valor || "")
-        .replace(/\D/g, "");
-
-    }
-
-
-    function selecionarPacote(tipo) {
-
-      pacote.value = tipo;
-
-      atualizarResumo();
-
-    }
-
-
-    function atualizarResumo() {
-
-      const escolhido =
-        PACOTES[pacote.value];
-
-      mesaNomes.classList.toggle(
-        "ativo",
-        pacote.value === "mesa_6"
-      );
-
-      if (!escolhido) {
-
-        resumoModalidade.textContent = "—";
-        resumoValor.textContent = "R$ 0,00";
-
-        return;
-
-      }
-
-      resumoModalidade.textContent =
-        escolhido.nome;
-
-      resumoValor.textContent =
-        formatarReal(escolhido.valor);
-
-    }
-
-
-    pacote.addEventListener(
-      "change",
-      atualizarResumo
-    );
-
-
-    /* =========================================================
-       FINALIZAR O CADASTRO
-       MOSTRAR PIX SOMENTE DEPOIS
-       ========================================================= */
-
-    formulario.addEventListener(
-      "submit",
-      function (evento) {
-
-        evento.preventDefault();
-
-        mensagemFormulario.textContent = "";
-
-        const dadosFormulario =
-          new FormData(formulario);
-
-
-        /* -------------------------------------------------------
-           PARTICIPANTES
-           ------------------------------------------------------- */
-
-        const convidados = [
-
-          dadosFormulario.get("guest_1"),
-          dadosFormulario.get("guest_2"),
-          dadosFormulario.get("guest_3"),
-          dadosFormulario.get("guest_4"),
-          dadosFormulario.get("guest_5"),
-          dadosFormulario.get("guest_6")
-
-        ]
-        .map(
-          nome =>
-            String(nome || "").trim()
-        )
-        .filter(Boolean);
-
-
-        /* -------------------------------------------------------
-           DADOS DA INSCRIÇÃO
-           ------------------------------------------------------- */
-
-        const dados = {
-
-          full_name:
-            String(
-              dadosFormulario.get("full_name") || ""
-            ).trim(),
-
-          email:
-            String(
-              dadosFormulario.get("email") || ""
-            ).trim(),
-
-          phone:
-            String(
-              dadosFormulario.get("phone") || ""
-            ).trim(),
-
-          package_type:
-            dadosFormulario.get("package_type"),
-
-          convidados:
-            convidados,
-
-          consent:
-            dadosFormulario.get("consent") === "on"
-
-        };
-
-
-        /* -------------------------------------------------------
-           VALIDAR CAMPOS
-           ------------------------------------------------------- */
-
-        if (
-          !dados.full_name ||
-          !dados.email ||
-          !dados.phone ||
-          !dados.package_type
-        ) {
-
-          mensagemFormulario.textContent =
-            "Preencha todos os campos obrigatórios.";
-
-          return;
-
-        }
-
-
-        if (!dados.consent) {
-
-          mensagemFormulario.textContent =
-            "É necessário autorizar o uso dos dados para continuar.";
-
-          return;
-
-        }
-
-
-        /* -------------------------------------------------------
-           VALIDAR CNPJ PIX
-           ------------------------------------------------------- */
-
-        const cnpj =
-          somenteNumeros(CHAVE_PIX_CNPJ);
-
-        if (cnpj.length !== 14) {
-
-          mensagemFormulario.textContent =
-            "A chave Pix ainda não foi configurada corretamente.";
-
-          return;
-
-        }
-
-
-        /* -------------------------------------------------------
-           GUARDAR DADOS
-           ------------------------------------------------------- */
-
-        inscricaoAtual = dados;
-
-
-        /* -------------------------------------------------------
-           PREENCHER A ETAPA DE PAGAMENTO
-           ------------------------------------------------------- */
-
-        const modalidade =
-          PACOTES[dados.package_type];
-
-        pagamentoNome.textContent =
-          dados.full_name;
-
-        pagamentoModalidade.textContent =
-          modalidade.nome;
-
-        pagamentoValor.textContent =
-          formatarReal(modalidade.valor);
-
-        chavePixTexto.textContent =
-          formatarCNPJ(cnpj);
-
-
-        /* -------------------------------------------------------
-           TROCAR DE ETAPA
-           ------------------------------------------------------- */
-
-        etapaCadastro.classList.add("oculto");
-
-        etapaPagamento.classList.add("ativa");
-
-
-        /* -------------------------------------------------------
-           ROLAR PARA O PIX
-           ------------------------------------------------------- */
-
-        etapaPagamento.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      }
-    );
-
-
-    /* =========================================================
-       CRIAR MENSAGEM COMPLETA PARA O SEU WHATSAPP
-       ========================================================= */
-
-    function criarMensagemWhatsapp(dados) {
-
-      const modalidade =
-        PACOTES[dados.package_type];
-
-      const pix =
-        formatarCNPJ(CHAVE_PIX_CNPJ);
-
-
-      let mensagem =
-
-`🌷 *A CASA DELAS — CONFIRMAÇÃO DE INSCRIÇÃO* 🌷
-
-Olá!
-
-Estou confirmando minha inscrição para o Jantar de Lançamento do Projeto Social A Casa Delas.
-
-*DADOS DA INSCRIÇÃO*
-
-👤 *Nome:* ${dados.full_name}
-📧 *E-mail:* ${dados.email}
-📱 *WhatsApp:* ${dados.phone}
-
-🎟️ *Modalidade:* ${modalidade.nome}
-💰 *Valor:* ${formatarReal(modalidade.valor)}
-
-💳 *Forma de pagamento:* Pix
-🔑 *Chave Pix / CNPJ:* ${pix}`;
-
-
-      /* -------------------------------------------------------
-         SE FOR MESA, INCLUIR PARTICIPANTES
-         ------------------------------------------------------- */
-
-      if (dados.package_type === "mesa_6") {
-
-        mensagem +=
-`\n\n👥 *PARTICIPANTES DA MESA:*`;
-
-        for (let i = 0; i < 6; i++) {
-
-          const nomeParticipante =
-            dados.convidados[i] ||
-            "Não informado";
-
-          mensagem +=
-`\n${i + 1}. ${nomeParticipante}`;
-
-        }
-
-      }
-
-
-      mensagem +=
-
-`
-
-📅 *Data:* 31 de agosto de 2026
-🕖 *Horário:* 19h
-
-📍 *Local:*
-Auditório da Igreja Batista Getsêmani
-Rua Antônio Nobre Filho, 155
-Jabour – Vitória/ES
-
-✅ Finalizei meu cadastro e estou entrando em contato para confirmar minha inscrição.
-
-📎 Encaminharei o comprovante do Pix por este WhatsApp.
-
-*A Casa Delas*
-Acolher • Fortalecer • Transformar`;
-
-
-      return mensagem;
-
-    }
-
-
-    /* =========================================================
-       BOTÃO FINAL
-       ABRIR O SEU WHATSAPP
-       ========================================================= */
-
-    btnConfirmarInscricao.addEventListener(
-      "click",
-      function () {
-
-        if (!inscricaoAtual) {
-
-          alert(
-            "Preencha a inscrição antes de confirmar."
-          );
-
-          return;
-
-        }
-
-
-        const whatsapp =
-          somenteNumeros(
-            WHATSAPP_PROJETO
-          );
-
-
-        if (whatsapp.length < 12) {
-
-          alert(
-            "O WhatsApp do projeto ainda não foi configurado corretamente."
-          );
-
-          return;
-
-        }
-
-
-        const mensagem =
-          criarMensagemWhatsapp(
-            inscricaoAtual
-          );
-
-
-        const linkWhatsapp =
-
-          "https://wa.me/" +
-
-          whatsapp +
-
-          "?text=" +
-
-          encodeURIComponent(
-            mensagem
-          );
-
-
-        /*
-          No celular abre o aplicativo do WhatsApp.
-          No computador abre o WhatsApp Web.
-        */
-
-        window.location.href =
-          linkWhatsapp;
-
-      }
-    );
-
-
-    /* =========================================================
-       INICIAR
-       ========================================================= */
-
-    atualizarResumo();
-
+    document.getElementById("abrirCadastro").addEventListener("click", () => {
+      capa.classList.add("fechada");
+      document.body.classList.remove("capa-aberta");
+      setTimeout(() => escolha.scrollIntoView({ behavior: "smooth", block: "center" }), 250);
+    });
+
+    document.querySelectorAll("[data-abrir]").forEach(botao => {
+      botao.addEventListener("click", () => {
+        escolha.classList.add("oculto");
+        const alvo = botao.dataset.abrir === "inscricao" ? formInscricao : formApoiador;
+        alvo.classList.remove("oculto");
+        alvo.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    document.querySelectorAll(".voltar").forEach(botao => {
+      botao.addEventListener("click", () => {
+        formInscricao.classList.add("oculto");
+        formApoiador.classList.add("oculto");
+        escolha.classList.remove("oculto");
+        escolha.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    });
+
+    historia.addEventListener("input", () => {
+      document.getElementById("contadorHistoria").textContent = historia.value.length;
+    });
+    aplicarMascaraTelefone(document.getElementById("telefoneInscricao"));
+    aplicarMascaraTelefone(document.getElementById("telefoneApoiador"));
+
+    tipoApoio.addEventListener("change", () => {
+      const profissional = tipoApoio.value === "Habilidade profissional";
+      const promoverCurso = tipoApoio.value === "Promover curso para as mulheres";
+      campoHabilidade.classList.toggle("oculto", !profissional);
+      campoCurso.classList.toggle("oculto", !promoverCurso);
+      habilidade.required = profissional;
+      curso.required = promoverCurso;
+      if (!profissional) habilidade.value = "";
+      if (!promoverCurso) curso.value = "";
+    });
+
+    formInscricao.addEventListener("submit", evento => {
+      evento.preventDefault();
+      if (!formInscricao.reportValidity()) return;
+      const dados = new FormData(formInscricao);
+      const relato = String(dados.get("historia") || "").trim() || "Não informado";
+      const mensagem = `🌷 *A CASA DELAS — NOVA INSCRIÇÃO* 🌷\n\n👤 *Nome completo:* ${dados.get("nome")}\n🎂 *Data de nascimento:* ${formatarData(dados.get("nascimento"))}\n📱 *WhatsApp:* ${dados.get("telefone")}\n\n📝 *Um pouco da minha história:*\n${relato}\n\n✅ Desejo realizar minha inscrição no Projeto A Casa Delas.\n\n*Acolher • Fortalecer • Transformar*`;
+      abrirWhatsapp(mensagem);
+    });
+
+    formApoiador.addEventListener("submit", evento => {
+      evento.preventDefault();
+      if (!formApoiador.reportValidity()) return;
+      const dados = new FormData(formApoiador);
+      let complemento = "";
+      if (dados.get("apoio") === "Habilidade profissional") complemento = `\n🛠️ *Habilidade:* ${dados.get("habilidade")}`;
+      if (dados.get("apoio") === "Promover curso para as mulheres") complemento = `\n📚 *Curso proposto:* ${dados.get("curso")}`;
+      const mensagem = `🤝 *A CASA DELAS — NOVO APOIADOR* 🤝\n\n👤 *Nome:* ${dados.get("nome")}\n📱 *WhatsApp:* ${dados.get("telefone")}\n💗 *Como quero apoiar:* ${dados.get("apoio")}${complemento}\n\n✅ Quero apoiar o Projeto A Casa Delas.\n\n*Acolher • Fortalecer • Transformar*`;
+      abrirWhatsapp(mensagem);
+    });
   </script>
-
 </body>
-
 </html>
