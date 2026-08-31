@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inscrição e cadastro de apoiadores do Projeto A Casa Delas.">
+  <title>A Casa Delas | Inscrição e Apoio</title>
+  <style>
+    :root {
+      --vinho: #4b2d37;
+      --vinho-claro: #6f414e;
+      --rose: #b66779;
+      --rose-claro: #d9a4ae;
+      --fundo: #fbf4f0;
+      --creme: #fffaf6;
+      --branco: #fff;
+      --texto: #34272b;
+      --texto-suave: #74666a;
+      --borda: #ead8d4;
+      --verde: #25d366;
+      --verde-hover: #1eaf55;
+      --sombra: 0 18px 45px rgba(75,45,55,.14);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--texto);
+      background: linear-gradient(160deg, #f7e9e5, var(--creme));
+      line-height: 1.5;
+    }
+    body.capa-aberta { overflow: hidden; }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    .oculto { display: none !important; }
+
+    .capa {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-y: auto;
+      padding: 18px;
+      background: linear-gradient(180deg, #f8ece8, #fffaf6);
+      transition: opacity .35s, visibility .35s;
+    }
+    .capa.fechada { opacity: 0; visibility: hidden; pointer-events: none; }
+    .capa-conteudo { width: min(100%, 540px); text-align: center; }
+    .capa img {
+      width: 100%;
+      max-height: calc(100svh - 105px);
+      object-fit: contain;
+      border-radius: 22px;
+      box-shadow: var(--sombra);
+    }
+    .link-inscricao {
+      display: inline-block;
+      margin-top: 16px;
+      border: 0;
+      background: transparent;
+      color: var(--vinho);
+      font-size: 1.12rem;
+      font-weight: 900;
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      letter-spacing: .02em;
+    }
+    .link-inscricao:hover { color: var(--rose); }
+
+    main { width: min(100% - 28px, 760px); margin: 0 auto; padding: 42px 0; }
+    .cabecalho { text-align: center; margin-bottom: 28px; }
+    .cabecalho img { width: 150px; border-radius: 50%; margin: 0 auto 16px; }
+    .cabecalho h1 { color: var(--vinho); font-family: Georgia, serif; font-size: clamp(2rem, 7vw, 3rem); }
+    .cabecalho p { margin-top: 8px; color: var(--texto-suave); }
+
+    .painel {
+      padding: clamp(20px, 5vw, 36px);
+      border: 1px solid var(--borda);
+      border-radius: 28px;
+      background: rgba(255,255,255,.96);
+      box-shadow: var(--sombra);
+    }
+    .escolha h2, .formulario h2 { color: var(--vinho); font-family: Georgia, serif; text-align: center; }
+    .escolha > p, .subtitulo { color: var(--texto-suave); text-align: center; margin: 8px 0 24px; }
+    .opcoes { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .opcao {
+      min-height: 78px;
+      padding: 16px 20px;
+      border: 2px solid var(--borda);
+      border-radius: 20px;
+      color: var(--vinho);
+      background: var(--creme);
+      font-weight: 900;
+      transition: .2s;
+    }
+    .opcao:hover { border-color: var(--rose); transform: translateY(-2px); }
+    .opcao span { display: block; margin-top: 4px; color: var(--texto-suave); font-size: .84rem; font-weight: 400; }
+
+    .voltar {
+      border: 0;
+      background: transparent;
+      color: var(--rose);
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+    .campo { margin-bottom: 17px; }
+    .campo label { display: block; margin-bottom: 7px; color: var(--vinho); font-size: .92rem; font-weight: 800; }
+    .campo input, .campo textarea, .campo select {
+      width: 100%;
+      border: 1px solid #dccbc7;
+      border-radius: 14px;
+      padding: 14px;
+      color: var(--texto);
+      background: #fffdfc;
+      outline: 0;
+      font-size: 16px;
+    }
+    .campo input, .campo select { min-height: 52px; }
+    .campo textarea { min-height: 150px; resize: vertical; }
+    .campo input:focus, .campo textarea:focus, .campo select:focus {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 4px rgba(182,103,121,.11);
+    }
+    .contador { display: block; margin-top: 5px; color: var(--texto-suave); font-size: .8rem; text-align: right; }
+    .detalhe-apoio { padding: 15px; margin: -4px 0 17px; border-radius: 16px; background: #f8eeee; }
+    .termos { display: grid; grid-template-columns: auto 1fr; gap: 10px; margin: 18px 0; color: var(--texto-suave); font-size: .84rem; }
+    .termos input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--rose); }
+    .enviar {
+      width: 100%;
+      min-height: 55px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--verde);
+      color: var(--branco);
+      font-weight: 900;
+      box-shadow: 0 10px 25px rgba(37,211,102,.2);
+    }
+    .enviar:hover { background: var(--verde-hover); }
+    .aviso { margin-top: 12px; color: var(--texto-suave); text-align: center; font-size: .82rem; }
+    footer { padding: 24px; color: var(--vinho); text-align: center; font-size: .85rem; }
+
+    @media (min-width: 650px) { .opcoes { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body class="capa-aberta">
+  <section class="capa" id="capa">
+    <div class="capa-conteudo">
+      <img src="./a-casa-delas.jpeg" alt="Projeto A Casa Delas">
+      <button class="link-inscricao" id="abrirCadastro" type="button">FAÇA A SUA INSCRIÇÃO</button>
+    </div>
+  </section>
+
+  <main id="cadastro">
+    <header class="cabecalho">
+      <img src="./a-casa-delas.jpeg" alt="Logomarca A Casa Delas">
+      <h1>A Casa Delas</h1>
+      <p>Acolher • Fortalecer • Transformar</p>
+    </header>
+
+    <section class="painel escolha" id="escolha">
+      <h2>Como você deseja participar?</h2>
+      <p>Escolha uma das opções abaixo para continuar.</p>
+      <div class="opcoes">
+        <button class="opcao" type="button" data-abrir="inscricao">
+          INSCRIÇÃO
+          <span>Quero me inscrever no projeto.</span>
+        </button>
+        <button class="opcao" type="button" data-abrir="apoiador">
+          QUERO SER UM APOIADOR
+          <span>Quero contribuir com o projeto.</span>
+        </button>
+      </div>
+    </section>
+
+    <form class="painel formulario oculto" id="formInscricao">
+      <button class="voltar" type="button">← Voltar às opções</button>
+      <h2>Inscrição</h2>
+      <p class="subtitulo">Preencha os seus dados.</p>
+      <div class="campo">
+        <label for="nomeInscricao">Nome completo *</label>
+        <input id="nomeInscricao" name="nome" type="text" maxlength="120" autocomplete="name" required>
+      </div>
+      <div class="campo">
+        <label for="nascimento">Data de nascimento *</label>
+        <input id="nascimento" name="nascimento" type="date" required>
+      </div>
+      <div class="campo">
+        <label for="telefoneInscricao">Telefone WhatsApp *</label>
+        <input id="telefoneInscricao" name="telefone" type="tel" maxlength="16" placeholder="(27) 99999-9999" autocomplete="tel" required>
+      </div>
+      <div class="campo">
+        <label for="historia">Conte um pouco da sua história (opcional)</label>
+        <textarea id="historia" name="historia" maxlength="500" placeholder="Escreva aqui, se desejar..."></textarea>
+        <small class="contador"><span id="contadorHistoria">0</span>/500 caracteres</small>
+      </div>
+      <label class="termos">
+        <input name="consentimento" type="checkbox" required>
+        <span>Autorizo o uso destes dados exclusivamente para contato e organização das atividades do Projeto A Casa Delas.</span>
+      </label>
+      <label class="termos">
+        <input name="autorizacao_imagem_voz" type="checkbox" required>
+        <span><strong>Autorização de uso de imagem e voz:</strong> autorizo, de forma gratuita, o Projeto A Casa Delas a registrar e utilizar minha imagem e minha voz em fotografias, vídeos e áudios produzidos durante suas atividades, para divulgação institucional do projeto em redes sociais, site, materiais informativos e apresentações, sem finalidade comercial indevida.</span>
+      </label>
+      <button class="enviar" type="submit">ENVIAR INSCRIÇÃO PELO WHATSAPP</button>
+      <p class="aviso">O WhatsApp será aberto com seus dados. Para concluir, toque em “Enviar”.</p>
+    </form>
+
+    <form class="painel formulario oculto" id="formApoiador">
+      <button class="voltar" type="button">← Voltar às opções</button>
+      <h2>Quero ser um apoiador</h2>
+      <p class="subtitulo">Conte como você gostaria de apoiar o projeto.</p>
+      <div class="campo">
+        <label for="nomeApoiador">Nome *</label>
+        <input id="nomeApoiador" name="nome" type="text" maxlength="120" autocomplete="name" required>
+      </div>
+      <div class="campo">
+        <label for="telefoneApoiador">Telefone WhatsApp *</label>
+        <input id="telefoneApoiador" name="telefone" type="tel" maxlength="16" placeholder="(27) 99999-9999" autocomplete="tel" required>
+      </div>
+      <div class="campo">
+        <label for="tipoApoio">Como quer apoiar o projeto? *</label>
+        <select id="tipoApoio" name="apoio" required>
+          <option value="">Selecione uma opção</option>
+          <option value="Financeiramente">1 - Financeiramente</option>
+          <option value="Habilidade profissional">2 - Habilidade profissional (qual?)</option>
+          <option value="Promover curso para as mulheres">3 - Promover curso para as mulheres</option>
+        </select>
+      </div>
+      <div class="campo detalhe-apoio oculto" id="campoHabilidade">
+        <label for="habilidade">Qual é a sua habilidade profissional? *</label>
+        <input id="habilidade" name="habilidade" type="text" maxlength="150" placeholder="Informe sua profissão ou habilidade">
+      </div>
+      <div class="campo detalhe-apoio oculto" id="campoCurso">
+        <label for="curso">Qual curso você gostaria de promover? *</label>
+        <input id="curso" name="curso" type="text" maxlength="150" placeholder="Informe o nome ou tema do curso">
+      </div>
+      <label class="termos">
+        <input name="consentimento" type="checkbox" required>
+        <span>Autorizo o uso destes dados exclusivamente para contato e organização das atividades do Projeto A Casa Delas.</span>
+      </label>
+      <label class="termos">
+        <input name="autorizacao_imagem_voz" type="checkbox" required>
+        <span><strong>Autorização de uso de imagem e voz:</strong> autorizo, de forma gratuita, o Projeto A Casa Delas a registrar e utilizar minha imagem e minha voz em fotografias, vídeos e áudios produzidos durante suas atividades, para divulgação institucional do projeto em redes sociais, site, materiais informativos e apresentações, sem finalidade comercial indevida.</span>
+      </label>
+      <button class="enviar" type="submit">ENVIAR CADASTRO PELO WHATSAPP</button>
+      <p class="aviso">O WhatsApp será aberto com seus dados. Para concluir, toque em “Enviar”.</p>
+    </form>
+  </main>
+
+  <footer>Projeto A Casa Delas — Acolher • Fortalecer • Transformar</footer>
+
+  <script>
+    const WHATSAPP_PROJETO = "5527997584887";
+    const capa = document.getElementById("capa");
+    const escolha = document.getElementById("escolha");
+    const formInscricao = document.getElementById("formInscricao");
+    const formApoiador = document.getElementById("formApoiador");
+    const historia = document.getElementById("historia");
+    const tipoApoio = document.getElementById("tipoApoio");
+    const campoHabilidade = document.getElementById("campoHabilidade");
+    const campoCurso = document.getElementById("campoCurso");
+    const habilidade = document.getElementById("habilidade");
+    const curso = document.getElementById("curso");
+
+    function somenteNumeros(valor) { return String(valor || "").replace(/\D/g, ""); }
+    function abrirWhatsapp(mensagem) {
+      window.location.href = "https://wa.me/" + WHATSAPP_PROJETO + "?text=" + encodeURIComponent(mensagem);
+    }
+    function formatarData(data) {
+      if (!data) return "";
+      const partes = data.split("-");
+      return partes[2] + "/" + partes[1] + "/" + partes[0];
+    }
+    function aplicarMascaraTelefone(campo) {
+      campo.addEventListener("input", () => {
+        let numero = somenteNumeros(campo.value).slice(0, 11);
+        if (numero.length > 10) numero = numero.replace(/(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
+        else if (numero.length > 6) numero = numero.replace(/(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+        else if (numero.length > 2) numero = numero.replace(/(\d{2})(\d+)/, "($1) $2");
+        else if (numero.length) numero = numero.replace(/(\d+)/, "($1");
+        campo.value = numero;
+      });
+    }
+
+    document.getElementById("abrirCadastro").addEventListener("click", () => {
+      capa.classList.add("fechada");
+      document.body.classList.remove("capa-aberta");
+      setTimeout(() => escolha.scrollIntoView({ behavior: "smooth", block: "center" }), 250);
+    });
+
+    document.querySelectorAll("[data-abrir]").forEach(botao => {
+      botao.addEventListener("click", () => {
+        escolha.classList.add("oculto");
+        const alvo = botao.dataset.abrir === "inscricao" ? formInscricao : formApoiador;
+        alvo.classList.remove("oculto");
+        alvo.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    document.querySelectorAll(".voltar").forEach(botao => {
+      botao.addEventListener("click", () => {
+        formInscricao.classList.add("oculto");
+        formApoiador.classList.add("oculto");
+        escolha.classList.remove("oculto");
+        escolha.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    });
+
+    historia.addEventListener("input", () => {
+      document.getElementById("contadorHistoria").textContent = historia.value.length;
+    });
+    aplicarMascaraTelefone(document.getElementById("telefoneInscricao"));
+    aplicarMascaraTelefone(document.getElementById("telefoneApoiador"));
+
+    tipoApoio.addEventListener("change", () => {
+      const profissional = tipoApoio.value === "Habilidade profissional";
+      const promoverCurso = tipoApoio.value === "Promover curso para as mulheres";
+      campoHabilidade.classList.toggle("oculto", !profissional);
+      campoCurso.classList.toggle("oculto", !promoverCurso);
+      habilidade.required = profissional;
+      curso.required = promoverCurso;
+      if (!profissional) habilidade.value = "";
+      if (!promoverCurso) curso.value = "";
+    });
+
+    formInscricao.addEventListener("submit", evento => {
+      evento.preventDefault();
+      if (!formInscricao.reportValidity()) return;
+      const dados = new FormData(formInscricao);
+      const relato = String(dados.get("historia") || "").trim() || "Não informado";
+      const mensagem = `🌷 *A CASA DELAS — NOVA INSCRIÇÃO* 🌷\n\n👤 *Nome completo:* ${dados.get("nome")}\n🎂 *Data de nascimento:* ${formatarData(dados.get("nascimento"))}\n📱 *WhatsApp:* ${dados.get("telefone")}\n\n📝 *Um pouco da minha história:*\n${relato}\n\n✅ Desejo realizar minha inscrição no Projeto A Casa Delas.\n✅ *Uso dos dados autorizado.*\n✅ *Uso de imagem e voz autorizado.*\n\n*Acolher • Fortalecer • Transformar*`;
+      abrirWhatsapp(mensagem);
+    });
+
+    formApoiador.addEventListener("submit", evento => {
+      evento.preventDefault();
+      if (!formApoiador.reportValidity()) return;
+      const dados = new FormData(formApoiador);
+      let complemento = "";
+      if (dados.get("apoio") === "Habilidade profissional") complemento = `\n🛠️ *Habilidade:* ${dados.get("habilidade")}`;
+      if (dados.get("apoio") === "Promover curso para as mulheres") complemento = `\n📚 *Curso proposto:* ${dados.get("curso")}`;
+      const mensagem = `🤝 *A CASA DELAS — NOVO APOIADOR* 🤝\n\n👤 *Nome:* ${dados.get("nome")}\n📱 *WhatsApp:* ${dados.get("telefone")}\n💗 *Como quero apoiar:* ${dados.get("apoio")}${complemento}\n\n✅ Quero apoiar o Projeto A Casa Delas.\n✅ *Uso dos dados autorizado.*\n✅ *Uso de imagem e voz autorizado.*\n\n*Acolher • Fortalecer • Transformar*`;
+      abrirWhatsapp(mensagem);
+    });
+  </script>
+</body>
+</html>
