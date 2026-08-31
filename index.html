@@ -69,6 +69,7 @@
       letter-spacing: .02em;
     }
     .link-inscricao:hover { color: var(--rose); }
+    .link-inscricao:disabled { color: var(--texto-suave); cursor: default; text-decoration: none; }
 
     main { width: min(100% - 28px, 760px); margin: 0 auto; padding: 42px 0; }
     .cabecalho { text-align: center; margin-bottom: 28px; }
@@ -140,6 +141,9 @@
     }
     .enviar:hover { background: var(--verde-hover); }
     .aviso { margin-top: 12px; color: var(--texto-suave); text-align: center; font-size: .82rem; }
+    .encerradas { text-align: center; }
+    .encerradas h2 { color: var(--vinho); font-family: Georgia, serif; font-size: 2rem; }
+    .encerradas p { margin-top: 10px; color: var(--texto-suave); }
     footer { padding: 24px; color: var(--vinho); text-align: center; font-size: .85rem; }
 
     @media (min-width: 650px) { .opcoes { grid-template-columns: 1fr 1fr; } }
@@ -148,31 +152,21 @@
 <body class="capa-aberta">
   <section class="capa" id="capa">
     <div class="capa-conteudo">
-      <img src="./a-casa-delas.png" alt="Projeto A Casa Delas">
-      <button class="link-inscricao" id="abrirCadastro" type="button">FAÇA A SUA INSCRIÇÃO</button>
+      <img src="./a-casa-delas.jpeg" alt="Projeto A Casa Delas">
+      <button class="link-inscricao" type="button" disabled>INSCRIÇÕES ENCERRADAS</button>
     </div>
   </section>
 
   <main id="cadastro">
     <header class="cabecalho">
-      <img src="./a-casa-delas.png" alt="Logomarca A Casa Delas">
+      <img src="./a-casa-delas.jpeg" alt="Logomarca A Casa Delas">
       <h1>A Casa Delas</h1>
       <p>Acolher • Fortalecer • Transformar</p>
     </header>
 
-    <section class="painel escolha" id="escolha">
-      <h2>Como você deseja participar?</h2>
-      <p>Escolha uma das opções abaixo para continuar.</p>
-      <div class="opcoes">
-        <button class="opcao" type="button" data-abrir="inscricao">
-          INSCRIÇÃO
-          <span>Quero me inscrever no projeto.</span>
-        </button>
-        <button class="opcao" type="button" data-abrir="apoiador">
-          QUERO SER UM APOIADOR
-          <span>Quero contribuir com o projeto.</span>
-        </button>
-      </div>
+    <section class="painel encerradas" id="escolha">
+      <h2>Inscrições encerradas</h2>
+      <p>No momento, não estamos recebendo novas inscrições ou cadastros de apoiadores.</p>
     </section>
 
     <form class="painel formulario oculto" id="formInscricao">
@@ -252,99 +246,5 @@
 
   <footer>Projeto A Casa Delas — Acolher • Fortalecer • Transformar</footer>
 
-  <script>
-    const WHATSAPP_PROJETO = "5527997584887";
-    const capa = document.getElementById("capa");
-    const escolha = document.getElementById("escolha");
-    const formInscricao = document.getElementById("formInscricao");
-    const formApoiador = document.getElementById("formApoiador");
-    const historia = document.getElementById("historia");
-    const tipoApoio = document.getElementById("tipoApoio");
-    const campoHabilidade = document.getElementById("campoHabilidade");
-    const campoCurso = document.getElementById("campoCurso");
-    const habilidade = document.getElementById("habilidade");
-    const curso = document.getElementById("curso");
-
-    function somenteNumeros(valor) { return String(valor || "").replace(/\D/g, ""); }
-    function abrirWhatsapp(mensagem) {
-      window.location.href = "https://wa.me/" + WHATSAPP_PROJETO + "?text=" + encodeURIComponent(mensagem);
-    }
-    function formatarData(data) {
-      if (!data) return "";
-      const partes = data.split("-");
-      return partes[2] + "/" + partes[1] + "/" + partes[0];
-    }
-    function aplicarMascaraTelefone(campo) {
-      campo.addEventListener("input", () => {
-        let numero = somenteNumeros(campo.value).slice(0, 11);
-        if (numero.length > 10) numero = numero.replace(/(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
-        else if (numero.length > 6) numero = numero.replace(/(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
-        else if (numero.length > 2) numero = numero.replace(/(\d{2})(\d+)/, "($1) $2");
-        else if (numero.length) numero = numero.replace(/(\d+)/, "($1");
-        campo.value = numero;
-      });
-    }
-
-    document.getElementById("abrirCadastro").addEventListener("click", () => {
-      capa.classList.add("fechada");
-      document.body.classList.remove("capa-aberta");
-      setTimeout(() => escolha.scrollIntoView({ behavior: "smooth", block: "center" }), 250);
-    });
-
-    document.querySelectorAll("[data-abrir]").forEach(botao => {
-      botao.addEventListener("click", () => {
-        escolha.classList.add("oculto");
-        const alvo = botao.dataset.abrir === "inscricao" ? formInscricao : formApoiador;
-        alvo.classList.remove("oculto");
-        alvo.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    });
-
-    document.querySelectorAll(".voltar").forEach(botao => {
-      botao.addEventListener("click", () => {
-        formInscricao.classList.add("oculto");
-        formApoiador.classList.add("oculto");
-        escolha.classList.remove("oculto");
-        escolha.scrollIntoView({ behavior: "smooth", block: "center" });
-      });
-    });
-
-    historia.addEventListener("input", () => {
-      document.getElementById("contadorHistoria").textContent = historia.value.length;
-    });
-    aplicarMascaraTelefone(document.getElementById("telefoneInscricao"));
-    aplicarMascaraTelefone(document.getElementById("telefoneApoiador"));
-
-    tipoApoio.addEventListener("change", () => {
-      const profissional = tipoApoio.value === "Habilidade profissional";
-      const promoverCurso = tipoApoio.value === "Promover curso para as mulheres";
-      campoHabilidade.classList.toggle("oculto", !profissional);
-      campoCurso.classList.toggle("oculto", !promoverCurso);
-      habilidade.required = profissional;
-      curso.required = promoverCurso;
-      if (!profissional) habilidade.value = "";
-      if (!promoverCurso) curso.value = "";
-    });
-
-    formInscricao.addEventListener("submit", evento => {
-      evento.preventDefault();
-      if (!formInscricao.reportValidity()) return;
-      const dados = new FormData(formInscricao);
-      const relato = String(dados.get("historia") || "").trim() || "Não informado";
-      const mensagem = `🌷 *A CASA DELAS — NOVA INSCRIÇÃO* 🌷\n\n👤 *Nome completo:* ${dados.get("nome")}\n🎂 *Data de nascimento:* ${formatarData(dados.get("nascimento"))}\n📱 *WhatsApp:* ${dados.get("telefone")}\n\n📝 *Um pouco da minha história:*\n${relato}\n\n✅ Desejo realizar minha inscrição no Projeto A Casa Delas.\n✅ *Uso dos dados autorizado.*\n✅ *Uso de imagem e voz autorizado.*\n\n*Acolher • Fortalecer • Transformar*`;
-      abrirWhatsapp(mensagem);
-    });
-
-    formApoiador.addEventListener("submit", evento => {
-      evento.preventDefault();
-      if (!formApoiador.reportValidity()) return;
-      const dados = new FormData(formApoiador);
-      let complemento = "";
-      if (dados.get("apoio") === "Habilidade profissional") complemento = `\n🛠️ *Habilidade:* ${dados.get("habilidade")}`;
-      if (dados.get("apoio") === "Promover curso para as mulheres") complemento = `\n📚 *Curso proposto:* ${dados.get("curso")}`;
-      const mensagem = `🤝 *A CASA DELAS — NOVO APOIADOR* 🤝\n\n👤 *Nome:* ${dados.get("nome")}\n📱 *WhatsApp:* ${dados.get("telefone")}\n💗 *Como quero apoiar:* ${dados.get("apoio")}${complemento}\n\n✅ Quero apoiar o Projeto A Casa Delas.\n✅ *Uso dos dados autorizado.*\n✅ *Uso de imagem e voz autorizado.*\n\n*Acolher • Fortalecer • Transformar*`;
-      abrirWhatsapp(mensagem);
-    });
-  </script>
 </body>
 </html>
