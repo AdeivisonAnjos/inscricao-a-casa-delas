@@ -148,14 +148,14 @@
 <body class="capa-aberta">
   <section class="capa" id="capa">
     <div class="capa-conteudo">
-      <img src="./a-casa-delas.png" alt="Projeto A Casa Delas">
+      <img src="./a-casa-delas.jpeg" alt="Projeto A Casa Delas">
       <button class="link-inscricao" id="abrirCadastro" type="button">FAÇA A SUA INSCRIÇÃO</button>
     </div>
   </section>
 
   <main id="cadastro">
     <header class="cabecalho">
-      <img src="./a-casa-delas.png" alt="Logomarca A Casa Delas">
+      <img src="./a-casa-delas.jpeg" alt="Logomarca A Casa Delas">
       <h1>A Casa Delas</h1>
       <p>Acolher • Fortalecer • Transformar</p>
     </header>
@@ -200,6 +200,10 @@
         <input name="consentimento" type="checkbox" required>
         <span>Autorizo o uso destes dados exclusivamente para contato e organização das atividades do Projeto A Casa Delas.</span>
       </label>
+      <label class="termos">
+        <input name="autorizacao_imagem_voz" type="checkbox" required>
+        <span><strong>Autorização de uso de imagem e voz:</strong> autorizo, de forma gratuita, o Projeto A Casa Delas a registrar e utilizar minha imagem e minha voz em fotografias, vídeos e áudios produzidos durante suas atividades, para divulgação institucional do projeto em redes sociais, site, materiais informativos e apresentações, sem finalidade comercial indevida.</span>
+      </label>
       <button class="enviar" type="submit">ENVIAR INSCRIÇÃO PELO WHATSAPP</button>
       <p class="aviso">O WhatsApp será aberto com seus dados. Para concluir, toque em “Enviar”.</p>
     </form>
@@ -236,6 +240,10 @@
       <label class="termos">
         <input name="consentimento" type="checkbox" required>
         <span>Autorizo o uso destes dados exclusivamente para contato e organização das atividades do Projeto A Casa Delas.</span>
+      </label>
+      <label class="termos">
+        <input name="autorizacao_imagem_voz" type="checkbox" required>
+        <span><strong>Autorização de uso de imagem e voz:</strong> autorizo, de forma gratuita, o Projeto A Casa Delas a registrar e utilizar minha imagem e minha voz em fotografias, vídeos e áudios produzidos durante suas atividades, para divulgação institucional do projeto em redes sociais, site, materiais informativos e apresentações, sem finalidade comercial indevida.</span>
       </label>
       <button class="enviar" type="submit">ENVIAR CADASTRO PELO WHATSAPP</button>
       <p class="aviso">O WhatsApp será aberto com seus dados. Para concluir, toque em “Enviar”.</p>
@@ -323,7 +331,7 @@
       if (!formInscricao.reportValidity()) return;
       const dados = new FormData(formInscricao);
       const relato = String(dados.get("historia") || "").trim() || "Não informado";
-      const mensagem = `🌷 *A CASA DELAS — NOVA INSCRIÇÃO* 🌷\n\n👤 *Nome completo:* ${dados.get("nome")}\n🎂 *Data de nascimento:* ${formatarData(dados.get("nascimento"))}\n📱 *WhatsApp:* ${dados.get("telefone")}\n\n📝 *Um pouco da minha história:*\n${relato}\n\n✅ Desejo realizar minha inscrição no Projeto A Casa Delas.\n\n*Acolher • Fortalecer • Transformar*`;
+      const mensagem = `🌷 *A CASA DELAS — NOVA INSCRIÇÃO* 🌷\n\n👤 *Nome completo:* ${dados.get("nome")}\n🎂 *Data de nascimento:* ${formatarData(dados.get("nascimento"))}\n📱 *WhatsApp:* ${dados.get("telefone")}\n\n📝 *Um pouco da minha história:*\n${relato}\n\n✅ Desejo realizar minha inscrição no Projeto A Casa Delas.\n✅ *Uso dos dados autorizado.*\n✅ *Uso de imagem e voz autorizado.*\n\n*Acolher • Fortalecer • Transformar*`;
       abrirWhatsapp(mensagem);
     });
 
@@ -334,7 +342,7 @@
       let complemento = "";
       if (dados.get("apoio") === "Habilidade profissional") complemento = `\n🛠️ *Habilidade:* ${dados.get("habilidade")}`;
       if (dados.get("apoio") === "Promover curso para as mulheres") complemento = `\n📚 *Curso proposto:* ${dados.get("curso")}`;
-      const mensagem = `🤝 *A CASA DELAS — NOVO APOIADOR* 🤝\n\n👤 *Nome:* ${dados.get("nome")}\n📱 *WhatsApp:* ${dados.get("telefone")}\n💗 *Como quero apoiar:* ${dados.get("apoio")}${complemento}\n\n✅ Quero apoiar o Projeto A Casa Delas.\n\n*Acolher • Fortalecer • Transformar*`;
+      const mensagem = `🤝 *A CASA DELAS — NOVO APOIADOR* 🤝\n\n👤 *Nome:* ${dados.get("nome")}\n📱 *WhatsApp:* ${dados.get("telefone")}\n💗 *Como quero apoiar:* ${dados.get("apoio")}${complemento}\n\n✅ Quero apoiar o Projeto A Casa Delas.\n✅ *Uso dos dados autorizado.*\n✅ *Uso de imagem e voz autorizado.*\n\n*Acolher • Fortalecer • Transformar*`;
       abrirWhatsapp(mensagem);
     });
   </script>
