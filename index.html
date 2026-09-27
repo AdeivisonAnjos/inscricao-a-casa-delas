@@ -60,6 +60,42 @@
     .campo input{width:100%;min-height:52px;border:1px solid #e0c3cc;border-radius:14px;
       padding:14px;color:var(--texto);background:#fffdfd;outline:0;font-size:16px}
     .campo input:focus{border-color:var(--rosa);box-shadow:0 0 0 4px rgba(217,47,102,.10)}
+    .valor-evento{
+      margin:0 0 18px;
+      padding:18px;
+      border:1px solid var(--borda);
+      border-radius:18px;
+      background:linear-gradient(135deg,#fff0f5,#fffaf8);
+      text-align:center;
+    }
+    .valor-evento small{
+      display:block;
+      color:var(--texto-suave);
+      font-weight:700;
+      margin-bottom:4px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+    .valor-evento strong{
+      display:block;
+      color:var(--vinho);
+      font-size:2rem;
+      line-height:1.1;
+    }
+    .confirmacao-pagamento{
+      margin:0 0 18px;
+      padding:15px;
+      border-radius:16px;
+      background:#fff0f5;
+      color:var(--texto-suave);
+      font-size:.9rem;
+      text-align:center;
+      border:1px solid var(--borda);
+    }
+    .confirmacao-pagamento strong{
+      color:var(--vinho);
+    }
+
     .termos{display:grid;grid-template-columns:auto 1fr;gap:10px;margin:18px 0;
       color:var(--texto-suave);font-size:.84rem}
     .termos input{width:18px;height:18px;margin-top:2px;accent-color:var(--rosa)}
@@ -119,6 +155,17 @@
       <h2>Inscrição</h2>
       <p>Preencha seus dados para participar do Jantar com Elas.</p>
 
+      <div class="valor-evento">
+        <small>Valor da inscrição</small>
+        <strong>R$ 50,00</strong>
+      </div>
+
+      <div class="confirmacao-pagamento">
+        <strong>Importante:</strong>
+        para que sua inscrição seja confirmada, é necessário
+        enviar o comprovante de pagamento pelo WhatsApp.
+      </div>
+
       <div class="campo">
         <label for="nome">Nome completo *</label>
         <input id="nome" name="nome" type="text" maxlength="120" autocomplete="name" required>
@@ -145,8 +192,8 @@
         <span><strong>Autorização de uso de imagem e voz:</strong> autorizo, de forma gratuita, o Projeto A Casa Delas e a organização do Jantar com Elas a registrar e utilizar minha imagem e minha voz em fotografias, vídeos e áudios produzidos durante o evento, para divulgação institucional em redes sociais, site, materiais informativos e apresentações, sem finalidade comercial indevida.</span>
       </label>
 
-      <button class="enviar" type="submit">CONFIRMAR MINHA INSCRIÇÃO</button>
-      <p class="aviso">O WhatsApp de A Casa Delas será aberto com seus dados. Para concluir, toque em “Enviar”.</p>
+      <button class="enviar" type="submit">ENVIAR INSCRIÇÃO PELO WHATSAPP</button>
+      <p class="aviso">O WhatsApp de A Casa Delas será aberto com seus dados. Para confirmar sua inscrição, envie também o comprovante de pagamento.</p>
     </form>
   </main>
 
@@ -225,6 +272,9 @@
 🎂 *Data de nascimento:* ${formatarData(dados.get("nascimento"))}
 📱 *WhatsApp:* ${dados.get("telefone")}
 
+💰 *Valor da inscrição:* R$ 50,00
+📎 *Confirmação:* estou ciente de que a inscrição será confirmada após o envio do comprovante de pagamento por este WhatsApp.
+
 📅 *Data:* 26 de outubro de 2026
 🕖 *Horário:* 19h
 
@@ -233,7 +283,8 @@ Auditório da Igreja Batista Getsêmani
 Rua Antônio Nobre Filho, 155
 Jabour — Vitória/ES
 
-✅ Desejo confirmar minha participação no *Jantar com Elas*.
+✅ Desejo participar do *Jantar com Elas*.
+✅ Estou ciente de que preciso enviar o comprovante de pagamento para confirmação da inscrição.
 ✅ *Uso dos dados autorizado.*
 ✅ *Uso de imagem e voz autorizado.*
 
