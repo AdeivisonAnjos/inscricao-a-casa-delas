@@ -1,305 +1,1288 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Inscrição para o Jantar com Elas — Uma Noite de Superação — Outubro Rosa.">
-  <title>Jantar com Elas | Inscrição</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Inscrição para o Jantar com Elas — Uma Noite de Superação — Outubro Rosa."
+  >
+
+  <title>
+    Jantar com Elas | Inscrição
+  </title>
 
   <style>
-    :root{
-      --vinho:#7a1734;--rosa:#d92f66;--rosa-claro:#f4c6d4;--fundo:#fff0f5;
-      --creme:#fffaf8;--branco:#fff;--texto:#40252e;--texto-suave:#7b6069;
-      --borda:#f0d1da;--verde:#25d366;--verde-hover:#1eaf55;
-      --sombra:0 18px 45px rgba(122,23,52,.14);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--texto);
-      background:linear-gradient(160deg,var(--fundo),var(--creme));line-height:1.5;overflow-x:hidden}
-    body.capa-aberta{overflow:hidden}
-    img{max-width:100%;display:block}
-    button,input{font:inherit}
-    button{cursor:pointer}
-    .container{width:min(100% - 28px,760px);margin:0 auto}
 
-    .capa{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
-      overflow-y:auto;padding:14px;background:linear-gradient(180deg,#fff0f5,#fffaf8);
-      transition:opacity .35s,visibility .35s}
-    .capa.fechada{opacity:0;visibility:hidden;pointer-events:none}
-    .capa-conteudo{width:min(100%,480px);text-align:center}
-    .capa img{width:auto;max-width:100%;max-height:calc(100svh - 105px);margin:0 auto;
-      object-fit:contain;border-radius:22px;box-shadow:var(--sombra)}
-    .btn-capa{width:100%;min-height:56px;margin-top:14px;border:0;border-radius:999px;
-      background:linear-gradient(135deg,var(--rosa),var(--vinho));color:#fff;font-weight:900;
-      font-size:1.02rem;box-shadow:0 12px 28px rgba(122,23,52,.22)}
-
-    main{width:min(100% - 28px,760px);margin:0 auto;padding:34px 0 46px}
-    .cabecalho{text-align:center;margin-bottom:24px}
-    .cabecalho img{width:120px;margin:0 auto 14px;object-fit:contain}
-    .tag{color:var(--rosa);font-size:.76rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
-    .cabecalho h1{margin-top:5px;color:var(--vinho);font-family:Georgia,serif;
-      font-size:clamp(2.35rem,10vw,4rem);line-height:1}
-    .cabecalho p{margin-top:10px;color:var(--texto-suave);font-weight:700}
-
-    .evento{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:22px}
-    .evento-item{display:grid;grid-template-columns:48px 1fr;gap:12px;align-items:center;
-      padding:15px;border:1px solid var(--borda);border-radius:18px;background:rgba(255,255,255,.94);
-      box-shadow:0 8px 22px rgba(122,23,52,.06)}
-    .evento-icone{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;
-      background:#fff0f5;color:var(--vinho);font-size:1.3rem}
-    .evento-item strong{display:block;color:var(--vinho)}
-    .evento-item span{color:var(--texto-suave);font-size:.92rem}
-
-    .painel{padding:clamp(20px,5vw,34px);border:1px solid var(--borda);border-radius:28px;
-      background:rgba(255,255,255,.97);box-shadow:var(--sombra)}
-    .painel h2{color:var(--vinho);font-family:Georgia,serif;text-align:center;font-size:1.9rem}
-    .painel>p{color:var(--texto-suave);text-align:center;margin:8px 0 24px}
-    .campo{margin-bottom:17px}
-    .campo label{display:block;margin-bottom:7px;color:var(--vinho);font-size:.92rem;font-weight:800}
-    .campo input{width:100%;min-height:52px;border:1px solid #e0c3cc;border-radius:14px;
-      padding:14px;color:var(--texto);background:#fffdfd;outline:0;font-size:16px}
-    .campo input:focus{border-color:var(--rosa);box-shadow:0 0 0 4px rgba(217,47,102,.10)}
-    .valor-evento{
-      margin:0 0 18px;
-      padding:18px;
-      border:1px solid var(--borda);
-      border-radius:18px;
-      background:linear-gradient(135deg,#fff0f5,#fffaf8);
-      text-align:center;
-    }
-    .valor-evento small{
-      display:block;
-      color:var(--texto-suave);
-      font-weight:700;
-      margin-bottom:4px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-    }
-    .valor-evento strong{
-      display:block;
-      color:var(--vinho);
-      font-size:2rem;
-      line-height:1.1;
-    }
-    .confirmacao-pagamento{
-      margin:0 0 18px;
-      padding:15px;
-      border-radius:16px;
-      background:#fff0f5;
-      color:var(--texto-suave);
-      font-size:.9rem;
-      text-align:center;
-      border:1px solid var(--borda);
-    }
-    .confirmacao-pagamento strong{
-      color:var(--vinho);
+    :root {
+      --vinho: #7a1734;
+      --vinho-escuro: #571126;
+      --rosa: #d92f66;
+      --rosa-claro: #f4c6d4;
+      --rosa-nevoa: #fff0f5;
+      --creme: #fffaf8;
+      --branco: #ffffff;
+      --texto: #40252e;
+      --texto-suave: #7b6069;
+      --borda: #f0d1da;
+      --verde: #25d366;
+      --verde-hover: #1eaf55;
+      --sombra: 0 18px 45px rgba(122, 23, 52, .14);
     }
 
-    .termos{display:grid;grid-template-columns:auto 1fr;gap:10px;margin:18px 0;
-      color:var(--texto-suave);font-size:.84rem}
-    .termos input{width:18px;height:18px;margin-top:2px;accent-color:var(--rosa)}
-    .enviar{width:100%;min-height:56px;border:0;border-radius:999px;background:var(--verde);
-      color:#fff;font-weight:900;box-shadow:0 10px 25px rgba(37,211,102,.2)}
-    .enviar:hover{background:var(--verde-hover)}
-    .aviso{margin-top:12px;color:var(--texto-suave);text-align:center;font-size:.82rem}
-
-    .oculto{display:none!important}
-    .etapa-pagamento{width:min(100% - 28px,760px);margin:0 auto;padding:34px 0 46px;animation:aparecer .3s ease}
-    .pagamento-conteudo{width:min(100%,560px);margin:0 auto;text-align:center}
-    .pagamento-conteudo img{width:100%;height:auto;object-fit:contain;border-radius:22px;box-shadow:var(--sombra)}
-    .btn-whatsapp{width:100%;min-height:56px;margin-top:18px;border:0;border-radius:999px;background:var(--verde);color:#fff;font-weight:900;box-shadow:0 10px 25px rgba(37,211,102,.22)}
-    .btn-whatsapp:hover{background:var(--verde-hover)}
-    @keyframes aparecer{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-    footer{padding:24px 18px 34px;color:var(--vinho);text-align:center;font-size:.85rem}
-
-    @media(min-width:650px){
-      .evento{grid-template-columns:1fr 1fr}
-      .evento-item:last-child{grid-column:1/-1}
-      .cabecalho img{width:145px}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--texto);
+      background:
+        radial-gradient(
+          circle at top left,
+          rgba(244, 198, 212, .45),
+          transparent 30%
+        ),
+        linear-gradient(
+          160deg,
+          #fff0f5,
+          var(--creme)
+        );
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .pagina {
+      min-height: 100svh;
+      width: 100%;
+      animation: aparecer .32s ease;
+    }
+
+    .oculto {
+      display: none !important;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      width: min(100% - 28px, 760px);
+      margin: 0 auto;
+    }
+
+
+    /* =========================================================
+       BOTÕES
+       ========================================================= */
+
+    .btn {
+      width: 100%;
+      min-height: 56px;
+      border: 0;
+      border-radius: 999px;
+      color: var(--branco);
+      font-weight: 900;
+      transition: .2s ease;
+    }
+
+    .btn-principal {
+      background:
+        linear-gradient(
+          135deg,
+          var(--rosa),
+          var(--vinho)
+        );
+
+      box-shadow:
+        0 10px 25px
+        rgba(122, 23, 52, .20);
+    }
+
+    .btn-whatsapp {
+      background: var(--verde);
+
+      box-shadow:
+        0 10px 25px
+        rgba(37, 211, 102, .22);
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--verde-hover);
+    }
+
+    .btn:active {
+      transform: scale(.985);
+    }
+
+
+    /* =========================================================
+       PÁGINA 1 — CONVITE
+       ========================================================= */
+
+    #pagina1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      background:
+        linear-gradient(
+          180deg,
+          #fff0f5,
+          #fffaf8
+        );
+    }
+
+    .capa-conteudo {
+      width: min(100%, 480px);
+      text-align: center;
+    }
+
+    .capa-convite {
+      width: auto;
+      max-width: 100%;
+      max-height: calc(100svh - 105px);
+      margin: 0 auto;
+      object-fit: contain;
+      border-radius: 22px;
+
+      box-shadow:
+        var(--sombra);
+    }
+
+    .capa-conteudo .btn {
+      margin-top: 14px;
+    }
+
+
+    /* =========================================================
+       PÁGINA 2 — FORMULÁRIO
+       ========================================================= */
+
+    #pagina2 {
+      padding: 24px 0 44px;
+    }
+
+    .topo-formulario {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .logo-grande {
+      width: 190px;
+      max-width: 70vw;
+      height: auto;
+      margin: 0 auto 14px;
+      object-fit: contain;
+
+      filter:
+        drop-shadow(
+          0 10px 20px
+          rgba(122, 23, 52, .10)
+        );
+    }
+
+    .tag {
+      color: var(--rosa);
+      font-size: .74rem;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .topo-formulario h1 {
+      color: var(--vinho);
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+      font-size:
+        clamp(
+          2.3rem,
+          10vw,
+          4rem
+        );
+      line-height: 1;
+    }
+
+    .topo-formulario p {
+      margin-top: 10px;
+      color: var(--texto-suave);
+      font-weight: 700;
+    }
+
+
+    /* =========================================================
+       DADOS DO EVENTO
+       ========================================================= */
+
+    .evento {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .evento-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 12px;
+      align-items: center;
+
+      padding: 15px;
+
+      border:
+        1px solid
+        var(--borda);
+
+      border-radius: 18px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .95
+        );
+
+      box-shadow:
+        0 8px 22px
+        rgba(122, 23, 52, .06);
+    }
+
+    .evento-icone {
+      width: 48px;
+      height: 48px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 15px;
+
+      background:
+        var(--rosa-nevoa);
+
+      color:
+        var(--vinho);
+
+      font-size: 1.3rem;
+    }
+
+    .evento-item strong {
+      display: block;
+      color:
+        var(--vinho);
+    }
+
+    .evento-item span {
+      color:
+        var(--texto-suave);
+
+      font-size: .92rem;
+    }
+
+
+    /* =========================================================
+       FORMULÁRIO
+       ========================================================= */
+
+    .painel {
+      padding:
+        clamp(
+          20px,
+          5vw,
+          34px
+        );
+
+      border:
+        1px solid
+        var(--borda);
+
+      border-radius: 28px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .97
+        );
+
+      box-shadow:
+        var(--sombra);
+    }
+
+    .painel h2 {
+      color:
+        var(--vinho);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      text-align: center;
+
+      font-size: 1.9rem;
+    }
+
+    .painel > p {
+      color:
+        var(--texto-suave);
+
+      text-align: center;
+
+      margin:
+        8px 0 24px;
+    }
+
+    .campo {
+      margin-bottom: 17px;
+    }
+
+    .campo label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color:
+        var(--vinho);
+
+      font-size: .92rem;
+
+      font-weight: 800;
+    }
+
+    .campo input {
+      width: 100%;
+
+      min-height: 52px;
+
+      border:
+        1px solid
+        #e0c3cc;
+
+      border-radius: 14px;
+
+      padding: 14px;
+
+      color:
+        var(--texto);
+
+      background:
+        #fffdfd;
+
+      outline: 0;
+
+      font-size: 16px;
+    }
+
+    .campo input:focus {
+      border-color:
+        var(--rosa);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(217, 47, 102, .10);
+    }
+
+
+    /* =========================================================
+       VALOR — ABAIXO DO WHATSAPP
+       ========================================================= */
+
+    .valor-evento {
+      margin:
+        2px 0 20px;
+
+      padding: 18px;
+
+      border:
+        1px solid
+        var(--borda);
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff0f5,
+          #fffaf8
+        );
+
+      text-align: center;
+    }
+
+    .valor-evento small {
+      display: block;
+
+      color:
+        var(--texto-suave);
+
+      font-weight: 700;
+
+      margin-bottom: 4px;
+
+      text-transform: uppercase;
+
+      letter-spacing: .08em;
+    }
+
+    .valor-evento strong {
+      display: block;
+
+      color:
+        var(--vinho);
+
+      font-size: 2rem;
+
+      line-height: 1.1;
+    }
+
+    .valor-evento p {
+      margin-top: 8px;
+
+      color:
+        var(--texto-suave);
+
+      font-size: .86rem;
+    }
+
+
+    /* =========================================================
+       AUTORIZAÇÕES
+       ========================================================= */
+
+    .termos {
+      display: grid;
+
+      grid-template-columns:
+        auto 1fr;
+
+      gap: 10px;
+
+      margin:
+        18px 0;
+
+      color:
+        var(--texto-suave);
+
+      font-size: .84rem;
+    }
+
+    .termos input {
+      width: 18px;
+      height: 18px;
+
+      margin-top: 2px;
+
+      accent-color:
+        var(--rosa);
+    }
+
+
+    /* =========================================================
+       PÁGINA 3 — PAGAMENTO
+       ========================================================= */
+
+    #pagina3 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding:
+        18px 14px 28px;
+    }
+
+    .pagamento-conteudo {
+      width:
+        min(
+          100%,
+          560px
+        );
+
+      margin: auto;
+
+      text-align: center;
+    }
+
+    .pagamento-imagem {
+      width: 100%;
+      height: auto;
+
+      object-fit: contain;
+
+      border-radius: 22px;
+
+      box-shadow:
+        var(--sombra);
+    }
+
+    .pagamento-conteudo .btn {
+      margin-top: 18px;
+    }
+
+    .aviso {
+      margin-top: 12px;
+
+      color:
+        var(--texto-suave);
+
+      text-align: center;
+
+      font-size: .82rem;
+    }
+
+
+    /* =========================================================
+       RESPONSIVO
+       ========================================================= */
+
+    @media
+    (min-width: 650px) {
+
+      .evento {
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .evento-item:last-child {
+        grid-column:
+          1 / -1;
+      }
+
+      .logo-grande {
+        width: 250px;
+      }
+
+    }
+
   </style>
 </head>
 
+
 <body>
-  <main id="etapaCadastro">
-    <header class="cabecalho">
-      <img src="./logo-transparente.png" alt="Logomarca A Casa Delas">
-      <div class="tag">Outubro Rosa</div>
-      <h1>Jantar com Elas</h1>
-      <p>Uma Noite de Superação</p>
-    </header>
 
-    <section class="evento">
-      <article class="evento-item">
-        <div class="evento-icone">📅</div>
-        <div><strong>Data</strong><span>26 de outubro de 2026</span></div>
-      </article>
 
-      <article class="evento-item">
-        <div class="evento-icone">🕖</div>
-        <div><strong>Horário</strong><span>19h</span></div>
-      </article>
+  <!-- =========================================================
+       PÁGINA 1
+       CONVITE + FAÇA SUA INSCRIÇÃO
+       ========================================================= -->
 
-      <article class="evento-item">
-        <div class="evento-icone">📍</div>
-        <div>
-          <strong>Local</strong>
-          <span>Auditório da Igreja Batista Getsêmani<br>
-          Rua Antônio Nobre Filho, 155 — Jabour — Vitória/ES</span>
-        </div>
-      </article>
-    </section>
+  <section
+    class="pagina"
+    id="pagina1"
+  >
 
-    <form class="painel" id="formInscricao">
-      <h2>Inscrição</h2>
-      <p>Preencha seus dados para participar do Jantar com Elas.</p>
+    <div class="capa-conteudo">
 
-      <div class="valor-evento">
-        <small>Valor da inscrição</small>
-        <strong>R$ 50,00</strong>
-      </div>
-
-      <div class="confirmacao-pagamento">
-        <strong>Importante:</strong>
-        para que sua inscrição seja confirmada, é necessário
-        enviar o comprovante de pagamento pelo WhatsApp.
-      </div>
-
-      <div class="campo">
-        <label for="nome">Nome completo *</label>
-        <input id="nome" name="nome" type="text" maxlength="120" autocomplete="name" required>
-      </div>
-
-      <div class="campo">
-        <label for="nascimento">Data de nascimento *</label>
-        <input id="nascimento" name="nascimento" type="date" required>
-      </div>
-
-      <div class="campo">
-        <label for="telefone">Telefone WhatsApp *</label>
-        <input id="telefone" name="telefone" type="tel" maxlength="16"
-          placeholder="(27) 99999-9999" autocomplete="tel" required>
-      </div>
-
-      <label class="termos">
-        <input name="consentimento" type="checkbox" required>
-        <span>Autorizo o uso destes dados exclusivamente para contato e organização do Jantar com Elas e das atividades relacionadas ao evento.</span>
-      </label>
-
-      <label class="termos">
-        <input name="autorizacao_imagem_voz" type="checkbox" required>
-        <span><strong>Autorização de uso de imagem e voz:</strong> autorizo, de forma gratuita, o Projeto A Casa Delas e a organização do Jantar com Elas a registrar e utilizar minha imagem e minha voz em fotografias, vídeos e áudios produzidos durante o evento, para divulgação institucional em redes sociais, site, materiais informativos e apresentações, sem finalidade comercial indevida.</span>
-      </label>
-
-      <button class="enviar" type="submit">PRÓXIMO</button>
-      
-    </form>
-  </main>
-
-  <!-- =======================================================
-       ETAPA 2 — IMAGEM + ENVIO VIA WHATSAPP
-       ======================================================= -->
-  <section class="etapa-pagamento oculto" id="etapaPagamento">
-    <div class="pagamento-conteudo">
       <img
-        src="./convite-pagamento-jantar-com-elas.png"
-        alt="Jantar com Elas — Chave Pix e confirmação de pagamento"
+        class="capa-convite"
+        src="./convite-jantar-com-elas.jpeg"
+        alt="Convite do Jantar com Elas — Outubro Rosa"
       >
+
 
       <button
-        class="btn-whatsapp"
-        id="btnEnviarWhatsapp"
+        class="btn btn-principal"
+        id="btnAbrirInscricao"
         type="button"
       >
-        ENVIAR A INSCRIÇÃO VIA WHATSAPP
+        FAÇA A SUA INSCRIÇÃO
       </button>
 
-      <p class="aviso">
-        Para confirmar sua inscrição, envie também o comprovante de pagamento pelo WhatsApp.
-      </p>
     </div>
+
   </section>
 
 
-  <footer>
-    Jantar com Elas — Uma Noite de Superação • Outubro Rosa<br>
-    A Casa Delas
-  </footer>
+
+  <!-- =========================================================
+       PÁGINA 2
+       LOGO GRANDE + EVENTO + FORMULÁRIO + PRÓXIMO
+       ========================================================= -->
+
+  <section
+    class="pagina oculto"
+    id="pagina2"
+  >
+
+    <div class="container">
+
+
+      <!-- LOGOMARCA GRANDE -->
+
+      <header class="topo-formulario">
+
+        <img
+          class="logo-grande"
+          src="./logo-transparente.png"
+          alt="Logomarca A Casa Delas"
+        >
+
+        <div class="tag">
+          Outubro Rosa
+        </div>
+
+        <h1>
+          Jantar com Elas
+        </h1>
+
+        <p>
+          Uma Noite de Superação
+        </p>
+
+      </header>
+
+
+
+      <!-- DATA / HORÁRIO / LOCAL -->
+
+      <section class="evento">
+
+        <article class="evento-item">
+
+          <div class="evento-icone">
+            📅
+          </div>
+
+          <div>
+
+            <strong>
+              Data
+            </strong>
+
+            <span>
+              26 de outubro de 2026
+            </span>
+
+          </div>
+
+        </article>
+
+
+
+        <article class="evento-item">
+
+          <div class="evento-icone">
+            🕖
+          </div>
+
+          <div>
+
+            <strong>
+              Horário
+            </strong>
+
+            <span>
+              19h
+            </span>
+
+          </div>
+
+        </article>
+
+
+
+        <article class="evento-item">
+
+          <div class="evento-icone">
+            📍
+          </div>
+
+          <div>
+
+            <strong>
+              Local
+            </strong>
+
+            <span>
+              Auditório da Igreja Batista Getsêmani
+              <br>
+              Rua Antônio Nobre Filho, 155
+              <br>
+              Jabour — Vitória/ES
+            </span>
+
+          </div>
+
+        </article>
+
+      </section>
+
+
+
+      <!-- FORMULÁRIO -->
+
+      <form
+        class="painel"
+        id="formInscricao"
+      >
+
+        <h2>
+          Faça sua inscrição
+        </h2>
+
+        <p>
+          Preencha os dados abaixo para continuar.
+        </p>
+
+
+
+        <!-- NOME -->
+
+        <div class="campo">
+
+          <label for="nome">
+            Nome completo *
+          </label>
+
+          <input
+            id="nome"
+            name="nome"
+            type="text"
+            maxlength="120"
+            autocomplete="name"
+            required
+          >
+
+        </div>
+
+
+
+        <!-- DATA DE NASCIMENTO -->
+
+        <div class="campo">
+
+          <label for="nascimento">
+            Data de nascimento *
+          </label>
+
+          <input
+            id="nascimento"
+            name="nascimento"
+            type="date"
+            required
+          >
+
+        </div>
+
+
+
+        <!-- WHATSAPP -->
+
+        <div class="campo">
+
+          <label for="telefone">
+            WhatsApp *
+          </label>
+
+          <input
+            id="telefone"
+            name="telefone"
+            type="tel"
+            maxlength="16"
+            placeholder="(27) 99999-9999"
+            autocomplete="tel"
+            required
+          >
+
+        </div>
+
+
+
+        <!-- VALOR ABAIXO DO WHATSAPP -->
+
+        <div class="valor-evento">
+
+          <small>
+            Valor da inscrição
+          </small>
+
+          <strong>
+            R$ 50,00
+          </strong>
+
+          <p>
+            Para confirmação da inscrição,
+            será necessário enviar o comprovante
+            de pagamento pelo WhatsApp.
+          </p>
+
+        </div>
+
+
+
+        <!-- AUTORIZAÇÃO DE DADOS -->
+
+        <label class="termos">
+
+          <input
+            name="consentimento"
+            type="checkbox"
+            required
+          >
+
+          <span>
+            Autorizo o uso dos dados informados
+            exclusivamente para contato,
+            organização e confirmação da minha inscrição
+            no Jantar com Elas.
+          </span>
+
+        </label>
+
+
+
+        <!-- AUTORIZAÇÃO DE IMAGEM E VOZ -->
+
+        <label class="termos">
+
+          <input
+            name="autorizacao_imagem_voz"
+            type="checkbox"
+            required
+          >
+
+          <span>
+
+            <strong>
+              Autorização de uso de imagem e voz:
+            </strong>
+
+            autorizo, de forma gratuita,
+            o Projeto A Casa Delas e a organização
+            do Jantar com Elas a registrar e utilizar
+            minha imagem e minha voz em fotografias,
+            vídeos e áudios produzidos durante o evento,
+            para divulgação institucional em redes sociais,
+            site, materiais informativos e apresentações,
+            sem finalidade comercial indevida.
+
+          </span>
+
+        </label>
+
+
+
+        <!-- BOTÃO PRÓXIMO -->
+
+        <button
+          class="btn btn-principal"
+          type="submit"
+        >
+          PRÓXIMO
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================================
+       PÁGINA 3
+       IMAGEM DO PAGAMENTO + ENVIAR SUA INSCRIÇÃO
+       ========================================================= -->
+
+  <section
+    class="pagina oculto"
+    id="pagina3"
+  >
+
+    <div class="pagamento-conteudo">
+
+
+      <img
+        class="pagamento-imagem"
+        src="./convite-pagamento-jantar-com-elas.png"
+        alt="Jantar com Elas — Chave Pix e confirmação do pagamento"
+      >
+
+
+      <button
+        class="btn btn-whatsapp"
+        id="btnEnviarInscricao"
+        type="button"
+      >
+        ENVIAR SUA INSCRIÇÃO
+      </button>
+
+
+      <p class="aviso">
+        O WhatsApp de A Casa Delas será aberto
+        com todos os seus dados.
+        Para concluir a confirmação,
+        envie também o comprovante de pagamento.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
 
   <script>
-    const WHATSAPP_PROJETO = "5527997584887";
 
-    const etapaCadastro = document.getElementById("etapaCadastro");
-    const etapaPagamento = document.getElementById("etapaPagamento");
-    const formInscricao = document.getElementById("formInscricao");
-    const telefone = document.getElementById("telefone");
-    const btnEnviarWhatsapp = document.getElementById("btnEnviarWhatsapp");
+
+    /* =========================================================
+       WHATSAPP QUE RECEBE A INSCRIÇÃO
+       ========================================================= */
+
+    const WHATSAPP_PROJETO =
+      "5527997584887";
+
+
+
+    /* =========================================================
+       ELEMENTOS DAS TRÊS PÁGINAS
+       ========================================================= */
+
+    const pagina1 =
+      document.getElementById(
+        "pagina1"
+      );
+
+    const pagina2 =
+      document.getElementById(
+        "pagina2"
+      );
+
+    const pagina3 =
+      document.getElementById(
+        "pagina3"
+      );
+
+    const btnAbrirInscricao =
+      document.getElementById(
+        "btnAbrirInscricao"
+      );
+
+    const formInscricao =
+      document.getElementById(
+        "formInscricao"
+      );
+
+    const telefone =
+      document.getElementById(
+        "telefone"
+      );
+
+    const btnEnviarInscricao =
+      document.getElementById(
+        "btnEnviarInscricao"
+      );
+
+
+
+    /* =========================================================
+       DADOS TEMPORÁRIOS DA INSCRIÇÃO
+       ========================================================= */
 
     let inscricaoAtual = null;
 
-    function somenteNumeros(valor){
-      return String(valor || "").replace(/\D/g,"");
+
+
+    /* =========================================================
+       FUNÇÕES
+       ========================================================= */
+
+    function somenteNumeros(valor) {
+
+      return String(valor || "")
+        .replace(/\D/g, "");
+
     }
 
-    function formatarData(data){
-      if(!data) return "";
-      const partes = data.split("-");
-      return partes[2] + "/" + partes[1] + "/" + partes[0];
+
+    function formatarData(data) {
+
+      if (!data) {
+        return "";
+      }
+
+      const partes =
+        data.split("-");
+
+      return (
+        partes[2] +
+        "/" +
+        partes[1] +
+        "/" +
+        partes[0]
+      );
+
     }
 
-    function aplicarMascaraTelefone(campo){
-      campo.addEventListener("input",()=>{
-        let numero = somenteNumeros(campo.value).slice(0,11);
 
-        if(numero.length > 10){
-          numero = numero.replace(/(\d{2})(\d{5})(\d{0,4})/,"($1) $2-$3");
-        }else if(numero.length > 6){
-          numero = numero.replace(/(\d{2})(\d{4})(\d{0,4})/,"($1) $2-$3");
-        }else if(numero.length > 2){
-          numero = numero.replace(/(\d{2})(\d+)/,"($1) $2");
-        }else if(numero.length){
-          numero = numero.replace(/(\d+)/,"($1");
+    function aplicarMascaraTelefone(campo) {
+
+      campo.addEventListener(
+        "input",
+        () => {
+
+          let numero =
+            somenteNumeros(
+              campo.value
+            )
+            .slice(0, 11);
+
+
+          if (numero.length > 10) {
+
+            numero =
+              numero.replace(
+                /(\d{2})(\d{5})(\d{0,4})/,
+                "($1) $2-$3"
+              );
+
+          }
+
+          else if (numero.length > 6) {
+
+            numero =
+              numero.replace(
+                /(\d{2})(\d{4})(\d{0,4})/,
+                "($1) $2-$3"
+              );
+
+          }
+
+          else if (numero.length > 2) {
+
+            numero =
+              numero.replace(
+                /(\d{2})(\d+)/,
+                "($1) $2"
+              );
+
+          }
+
+          else if (numero.length) {
+
+            numero =
+              numero.replace(
+                /(\d+)/,
+                "($1"
+              );
+
+          }
+
+
+          campo.value =
+            numero;
+
         }
+      );
 
-        campo.value = numero;
-      });
     }
 
-    aplicarMascaraTelefone(telefone);
 
-    formInscricao.addEventListener("submit",evento=>{
-      evento.preventDefault();
+    function mostrarPagina(numero) {
 
-      if(!formInscricao.reportValidity()) return;
+      pagina1.classList.add(
+        "oculto"
+      );
 
-      const dados = new FormData(formInscricao);
+      pagina2.classList.add(
+        "oculto"
+      );
 
-      inscricaoAtual = {
-        nome: String(dados.get("nome") || "").trim(),
-        nascimento: String(dados.get("nascimento") || ""),
-        telefone: String(dados.get("telefone") || "").trim(),
-        consentimento: dados.get("consentimento") === "on",
-        autorizacaoImagemVoz: dados.get("autorizacao_imagem_voz") === "on"
-      };
+      pagina3.classList.add(
+        "oculto"
+      );
 
-      etapaCadastro.classList.add("oculto");
-      etapaPagamento.classList.remove("oculto");
+
+      if (numero === 1) {
+
+        pagina1.classList.remove(
+          "oculto"
+        );
+
+      }
+
+
+      if (numero === 2) {
+
+        pagina2.classList.remove(
+          "oculto"
+        );
+
+      }
+
+
+      if (numero === 3) {
+
+        pagina3.classList.remove(
+          "oculto"
+        );
+
+      }
+
 
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       });
-    });
 
-    btnEnviarWhatsapp.addEventListener("click",()=>{
-      if(!inscricaoAtual){
-        alert("Preencha primeiro os dados da inscrição.");
-        return;
+    }
+
+
+
+    /* =========================================================
+       MÁSCARA DO TELEFONE
+       ========================================================= */
+
+    aplicarMascaraTelefone(
+      telefone
+    );
+
+
+
+    /* =========================================================
+       PÁGINA 1 → PÁGINA 2
+       ========================================================= */
+
+    btnAbrirInscricao.addEventListener(
+      "click",
+      () => {
+
+        mostrarPagina(2);
+
       }
+    );
 
-      const mensagem =
+
+
+    /* =========================================================
+       PÁGINA 2 → PÁGINA 3
+       ========================================================= */
+
+    formInscricao.addEventListener(
+      "submit",
+      evento => {
+
+        evento.preventDefault();
+
+
+        if (
+          !formInscricao.reportValidity()
+        ) {
+
+          return;
+
+        }
+
+
+        const dados =
+          new FormData(
+            formInscricao
+          );
+
+
+        inscricaoAtual = {
+
+          nome:
+            String(
+              dados.get("nome") || ""
+            ).trim(),
+
+          nascimento:
+            String(
+              dados.get("nascimento") || ""
+            ),
+
+          telefone:
+            String(
+              dados.get("telefone") || ""
+            ).trim(),
+
+          consentimento:
+            dados.get(
+              "consentimento"
+            ) === "on",
+
+          autorizacaoImagemVoz:
+            dados.get(
+              "autorizacao_imagem_voz"
+            ) === "on"
+
+        };
+
+
+        mostrarPagina(3);
+
+      }
+    );
+
+
+
+    /* =========================================================
+       PÁGINA 3 → WHATSAPP
+       ========================================================= */
+
+    btnEnviarInscricao.addEventListener(
+      "click",
+      () => {
+
+
+        if (!inscricaoAtual) {
+
+          alert(
+            "Preencha primeiro os dados da inscrição."
+          );
+
+          mostrarPagina(2);
+
+          return;
+
+        }
+
+
+        const mensagem =
+
 `🌸 *JANTAR COM ELAS — NOVA INSCRIÇÃO* 🌸
 
 🎀 *Uma Noite de Superação — Outubro Rosa*
@@ -328,14 +1311,29 @@ Jabour — Vitória/ES
 🎀 *Outubro Rosa*
 *A Casa Delas*`;
 
-      const linkWhatsapp =
-        "https://wa.me/" +
-        WHATSAPP_PROJETO +
-        "?text=" +
-        encodeURIComponent(mensagem);
 
-      window.location.href = linkWhatsapp;
-    });
+        const linkWhatsapp =
+
+          "https://wa.me/" +
+
+          WHATSAPP_PROJETO +
+
+          "?text=" +
+
+          encodeURIComponent(
+            mensagem
+          );
+
+
+        window.location.href =
+          linkWhatsapp;
+
+      }
+    );
+
+
   </script>
+
 </body>
+
 </html>
