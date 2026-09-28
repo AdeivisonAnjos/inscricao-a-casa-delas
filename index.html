@@ -103,6 +103,15 @@
       color:#fff;font-weight:900;box-shadow:0 10px 25px rgba(37,211,102,.2)}
     .enviar:hover{background:var(--verde-hover)}
     .aviso{margin-top:12px;color:var(--texto-suave);text-align:center;font-size:.82rem}
+
+    .oculto{display:none!important}
+    .etapa-pagamento{width:min(100% - 28px,760px);margin:0 auto;padding:34px 0 46px;animation:aparecer .3s ease}
+    .pagamento-conteudo{width:min(100%,560px);margin:0 auto;text-align:center}
+    .pagamento-conteudo img{width:100%;height:auto;object-fit:contain;border-radius:22px;box-shadow:var(--sombra)}
+    .btn-whatsapp{width:100%;min-height:56px;margin-top:18px;border:0;border-radius:999px;background:var(--verde);color:#fff;font-weight:900;box-shadow:0 10px 25px rgba(37,211,102,.22)}
+    .btn-whatsapp:hover{background:var(--verde-hover)}
+    @keyframes aparecer{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
     footer{padding:24px 18px 34px;color:var(--vinho);text-align:center;font-size:.85rem}
 
     @media(min-width:650px){
@@ -113,16 +122,8 @@
   </style>
 </head>
 
-<body class="capa-aberta">
-
-  <section class="capa" id="capa">
-    <div class="capa-conteudo">
-      <img src="./convite-jantar-com-elas.jpeg" alt="Convite do Jantar com Elas — Outubro Rosa">
-      <button class="btn-capa" id="abrirCadastro" type="button">FAÇA A SUA INSCRIÇÃO</button>
-    </div>
-  </section>
-
-  <main id="cadastro">
+<body>
+  <main id="etapaCadastro">
     <header class="cabecalho">
       <img src="./logo-transparente.png" alt="Logomarca A Casa Delas">
       <div class="tag">Outubro Rosa</div>
@@ -192,10 +193,35 @@
         <span><strong>Autorização de uso de imagem e voz:</strong> autorizo, de forma gratuita, o Projeto A Casa Delas e a organização do Jantar com Elas a registrar e utilizar minha imagem e minha voz em fotografias, vídeos e áudios produzidos durante o evento, para divulgação institucional em redes sociais, site, materiais informativos e apresentações, sem finalidade comercial indevida.</span>
       </label>
 
-      <button class="enviar" type="submit">ENVIAR INSCRIÇÃO PELO WHATSAPP</button>
-      <p class="aviso">O WhatsApp de A Casa Delas será aberto com seus dados. Para confirmar sua inscrição, envie também o comprovante de pagamento.</p>
+      <button class="enviar" type="submit">PRÓXIMO</button>
+      
     </form>
   </main>
+
+  <!-- =======================================================
+       ETAPA 2 — IMAGEM + ENVIO VIA WHATSAPP
+       ======================================================= -->
+  <section class="etapa-pagamento oculto" id="etapaPagamento">
+    <div class="pagamento-conteudo">
+      <img
+        src="./convite-pagamento-jantar-com-elas.png"
+        alt="Jantar com Elas — Chave Pix e confirmação de pagamento"
+      >
+
+      <button
+        class="btn-whatsapp"
+        id="btnEnviarWhatsapp"
+        type="button"
+      >
+        ENVIAR A INSCRIÇÃO VIA WHATSAPP
+      </button>
+
+      <p class="aviso">
+        Para confirmar sua inscrição, envie também o comprovante de pagamento pelo WhatsApp.
+      </p>
+    </div>
+  </section>
+
 
   <footer>
     Jantar com Elas — Uma Noite de Superação • Outubro Rosa<br>
@@ -205,17 +231,16 @@
   <script>
     const WHATSAPP_PROJETO = "5527997584887";
 
-    const capa = document.getElementById("capa");
+    const etapaCadastro = document.getElementById("etapaCadastro");
+    const etapaPagamento = document.getElementById("etapaPagamento");
     const formInscricao = document.getElementById("formInscricao");
     const telefone = document.getElementById("telefone");
+    const btnEnviarWhatsapp = document.getElementById("btnEnviarWhatsapp");
+
+    let inscricaoAtual = null;
 
     function somenteNumeros(valor){
       return String(valor || "").replace(/\D/g,"");
-    }
-
-    function abrirWhatsapp(mensagem){
-      window.location.href =
-        "https://wa.me/" + WHATSAPP_PROJETO + "?text=" + encodeURIComponent(mensagem);
     }
 
     function formatarData(data){
@@ -242,18 +267,6 @@
       });
     }
 
-    document.getElementById("abrirCadastro").addEventListener("click",()=>{
-      capa.classList.add("fechada");
-      document.body.classList.remove("capa-aberta");
-
-      setTimeout(()=>{
-        document.getElementById("cadastro").scrollIntoView({
-          behavior:"smooth",
-          block:"start"
-        });
-      },250);
-    });
-
     aplicarMascaraTelefone(telefone);
 
     formInscricao.addEventListener("submit",evento=>{
@@ -263,17 +276,39 @@
 
       const dados = new FormData(formInscricao);
 
+      inscricaoAtual = {
+        nome: String(dados.get("nome") || "").trim(),
+        nascimento: String(dados.get("nascimento") || ""),
+        telefone: String(dados.get("telefone") || "").trim(),
+        consentimento: dados.get("consentimento") === "on",
+        autorizacaoImagemVoz: dados.get("autorizacao_imagem_voz") === "on"
+      };
+
+      etapaCadastro.classList.add("oculto");
+      etapaPagamento.classList.remove("oculto");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    btnEnviarWhatsapp.addEventListener("click",()=>{
+      if(!inscricaoAtual){
+        alert("Preencha primeiro os dados da inscrição.");
+        return;
+      }
+
       const mensagem =
 `🌸 *JANTAR COM ELAS — NOVA INSCRIÇÃO* 🌸
 
 🎀 *Uma Noite de Superação — Outubro Rosa*
 
-👤 *Nome completo:* ${dados.get("nome")}
-🎂 *Data de nascimento:* ${formatarData(dados.get("nascimento"))}
-📱 *WhatsApp:* ${dados.get("telefone")}
+👤 *Nome completo:* ${inscricaoAtual.nome}
+🎂 *Data de nascimento:* ${formatarData(inscricaoAtual.nascimento)}
+📱 *WhatsApp:* ${inscricaoAtual.telefone}
 
 💰 *Valor da inscrição:* R$ 50,00
-📎 *Confirmação:* estou ciente de que a inscrição será confirmada após o envio do comprovante de pagamento por este WhatsApp.
 
 📅 *Data:* 26 de outubro de 2026
 🕖 *Horário:* 19h
@@ -284,15 +319,22 @@ Rua Antônio Nobre Filho, 155
 Jabour — Vitória/ES
 
 ✅ Desejo participar do *Jantar com Elas*.
-✅ Estou ciente de que preciso enviar o comprovante de pagamento para confirmação da inscrição.
 ✅ *Uso dos dados autorizado.*
 ✅ *Uso de imagem e voz autorizado.*
+
+📎 Estou ciente de que a inscrição será confirmada após o envio do comprovante de pagamento via WhatsApp.
 
 🌷 *Jantar com Elas — Uma Noite de Superação*
 🎀 *Outubro Rosa*
 *A Casa Delas*`;
 
-      abrirWhatsapp(mensagem);
+      const linkWhatsapp =
+        "https://wa.me/" +
+        WHATSAPP_PROJETO +
+        "?text=" +
+        encodeURIComponent(mensagem);
+
+      window.location.href = linkWhatsapp;
     });
   </script>
 </body>
